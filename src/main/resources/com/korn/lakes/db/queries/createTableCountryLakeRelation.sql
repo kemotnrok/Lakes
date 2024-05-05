@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS country_lake_relation(
+countryId INTEGER NOT NULL PRIMARY KEY,
+lakeId INTEGER NOT NULL PRIMARY KEY,
+FOREIGN KEY (countryId) REFERENCES countries(id),
+FOREIGN KEY (lakeId) REFERENCES lakes(id)
+);
