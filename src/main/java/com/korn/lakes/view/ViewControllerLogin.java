@@ -3,10 +3,9 @@ package com.korn.lakes.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class LoginController {
+public class ViewControllerLogin {
 
     @FXML
     private TextField email;
@@ -19,6 +18,8 @@ public class LoginController {
 
     @FXML
     protected void onCreateAccount() {
-        System.out.println("zum Registrieren");
+        StageComponent stageComponent = new StageComponent(createAccount, "view-createAccountEmail");
+        stageComponent.getStage().setTitle("Konto erstellen");
+        stageComponent.changeScene();
     }
 }
