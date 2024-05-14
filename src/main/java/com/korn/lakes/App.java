@@ -32,12 +32,12 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[32];
-        random.nextBytes(salt);
-
-        String saltString = Base64.getUrlEncoder().encodeToString(salt);
-        System.out.println(saltString);
+//        SecureRandom random = new SecureRandom();
+//        byte[] salt = new byte[32];
+//        random.nextBytes(salt);
+//
+//        String saltString = Base64.getUrlEncoder().encodeToString(salt);
+//        System.out.println(saltString);
         launch();
     }
 }
