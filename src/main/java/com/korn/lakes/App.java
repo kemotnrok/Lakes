@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 public class App extends Application {
     @Override
@@ -30,6 +32,12 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[32];
+        random.nextBytes(salt);
+
+        String saltString = Base64.getUrlEncoder().encodeToString(salt);
+        System.out.println(saltString);
         launch();
     }
 }
