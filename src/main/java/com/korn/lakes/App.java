@@ -26,18 +26,12 @@ public class App extends Application {
 //        Szene starten
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/view-loginEmail.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 440, 340);
-        stage.setTitle("Login");
+        stage.setTitle("Lakes to see");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-//        SecureRandom random = new SecureRandom();
-//        byte[] salt = new byte[32];
-//        random.nextBytes(salt);
-//
-//        String saltString = Base64.getUrlEncoder().encodeToString(salt);
-//        System.out.println(saltString);
         launch();
     }
 }
