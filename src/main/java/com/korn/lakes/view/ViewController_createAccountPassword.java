@@ -3,7 +3,7 @@ package com.korn.lakes.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class ViewControllerCreateAccountPassword {
+public class ViewController_createAccountPassword {
 
     @FXML
     private Button weiterToConfirmAccountFromPassword;
@@ -24,5 +24,4 @@ public class ViewControllerCreateAccountPassword {
         stageComponent.getStage().setTitle("Lakes to see");
         stageComponent.changeScene();
     }
-
 }

@@ -1,5 +1,6 @@
 package com.korn.lakes;
 
+import com.korn.lakes.view.ViewTempData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,6 +33,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        ViewTempData tempData = new ViewTempData();
         launch();
     }
 }

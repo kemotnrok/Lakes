@@ -1,11 +1,10 @@
 package com.korn.lakes.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
 
-public class ViewControllerLoginPassword {
+public class ViewController_loginPassword {
 
     @FXML
     private Button zurueckToLoginEmail;
@@ -14,8 +13,7 @@ public class ViewControllerLoginPassword {
     private Button weiterToLandingPage;
 
     @FXML
-    private Object eyeLoginPassword;
-
+    private Node eyeLoginPassword;
 
     @FXML
     protected void onZurueckToLoginEmail() {
