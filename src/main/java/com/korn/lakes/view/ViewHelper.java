@@ -1,5 +1,9 @@
 package com.korn.lakes.view;
 
+import javafx.scene.Node;
+
 public class ViewHelper {
-//    protected void unhidePassword(Node fxElement)
+    protected static void unhidePassword(Node element) {
+        System.out.println(element);
+    }
 }

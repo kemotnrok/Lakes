@@ -31,7 +31,7 @@ public class ViewController_loginPassword {
 
     @FXML
     protected void showPasswordLogin(){
-        System.out.println("Passwort einblenden"); // Todo
+        ViewHelper.unhidePassword(eyeLoginPassword);
     }
 
 
