@@ -31,9 +31,10 @@ public class ViewController_loginEmail {
     @FXML
     protected void onWeiterToLoginPassword() {
         StageComponent stageComponent = new StageComponent(weiterToLoginPassword, "view-loginPassword");
-        stageComponent.getStage().setTitle("Lakes to see");
+        Stage nextStage = stageComponent.getStage();
+        nextStage.setTitle("Lakes to see");
+        ViewController_loginPassword.setEmailInLoginPassword(emailField.getText());
         stageComponent.changeScene();
-
     }
 
     /**
@@ -43,6 +44,4 @@ public class ViewController_loginEmail {
     protected void setEmailField(String email){
         emailField.setText(email);
     }
-
-
 }

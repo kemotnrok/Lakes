@@ -3,6 +3,7 @@ package com.korn.lakes.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ViewController_createAccountEmail {
 
@@ -26,7 +27,9 @@ public class ViewController_createAccountEmail {
     @FXML
     protected void onWeiterToCreateAccountPassword() {
         StageComponent stageComponent = new StageComponent(weiterToCreateAccountPassword, "view-createAccountPassword");
-        stageComponent.getStage().setTitle("Lakes to see");
+        Stage nextStage = stageComponent.getStage();
+        ViewController_createAccountPassword.setEmailInCreateAccountPassword(createAccountEmail.getText());
+        nextStage.setTitle("Lakes to see");
         stageComponent.changeScene();
     }
 
