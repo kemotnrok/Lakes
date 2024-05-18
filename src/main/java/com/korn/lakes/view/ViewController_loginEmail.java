@@ -33,6 +33,15 @@ public class ViewController_loginEmail {
         StageComponent stageComponent = new StageComponent(weiterToLoginPassword, "view-loginPassword");
         stageComponent.getStage().setTitle("Lakes to see");
         stageComponent.changeScene();
+
+    }
+
+    /**
+     * Transfer email to the next dialogue box
+     * @param email String
+     */
+    protected void setEmailField(String email){
+        emailField.setText(email);
     }
 
 

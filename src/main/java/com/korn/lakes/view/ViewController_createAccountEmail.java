@@ -19,6 +19,7 @@ public class ViewController_createAccountEmail {
     protected void onZurueckToLoginEmailFromCreateAccount() {
         StageComponent stageComponent = new StageComponent(zurueckToLoginEmailFromCreateAccount, "view-loginEmail");
         stageComponent.getStage().setTitle("Lakes to see");
+        ((ViewController_loginEmail) stageComponent.getController()).setEmailField(createAccountEmail.getText());
         stageComponent.changeScene();
     }
 
@@ -29,6 +30,10 @@ public class ViewController_createAccountEmail {
         stageComponent.changeScene();
     }
 
+    /**
+     * Transfer email to the previous dialogue box
+     * @param emailText String
+     */
     protected void setEmail(String emailText){
         createAccountEmail.setText(emailText);
     }

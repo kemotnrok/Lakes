@@ -1,16 +1,12 @@
 package com.korn.lakes;
 
-import com.korn.lakes.view.ViewTempData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Objects;
-import java.security.SecureRandom;
-import java.util.Base64;
 
 public class App extends Application {
     @Override
@@ -33,7 +29,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        ViewTempData tempData = new ViewTempData();
         launch();
     }
 }
