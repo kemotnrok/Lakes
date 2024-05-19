@@ -3,11 +3,12 @@ package com.korn.lakes.view;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.PasswordField;
 
 public class ViewController_createAccountPassword {
 
-    private static String emailInCreateAccountPassword;
+    private static String email;
+    private static String password;
 
     @FXML
     private Button weiterToConfirmAccountFromPassword;
@@ -19,33 +20,44 @@ public class ViewController_createAccountPassword {
     private Node eyeLoginPassword;
 
     @FXML
+    private PasswordField passwortFieldAccount;
+
+    @FXML
     protected void onWeiterToConfirmAccount(){
-        StageComponent stageComponent = new StageComponent(weiterToConfirmAccountFromPassword, "view-confirmAccount");
-        stageComponent.getStage().setTitle("Lakes to see");
-        stageComponent.changeScene();
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(weiterToConfirmAccountFromPassword, "view-confirmAccount");
     }
 
     @FXML
     protected void onZurueckToLoginEmail() {
-        StageComponent stageComponent = new StageComponent(zurueckToAccountEmailFromPassword, "view-loginEmail");
-        Stage nextStage = stageComponent.getStage();
-        ((ViewController_loginEmail) stageComponent.getController()).setEmailField(emailInCreateAccountPassword);
-        nextStage.setTitle("Lakes to see");
-        stageComponent.changeScene();
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(zurueckToAccountEmailFromPassword, "view-loginEmail");
+        ((ViewController_loginEmail) changeScene.getController()).setEmail(email);
+        if (!(passwortFieldAccount.getText() == null)) {
+            ViewController_createAccountEmail.setPassword(passwortFieldAccount.getText());
+        }
     }
 
     @FXML
     protected void showPasswordLogin(){
-        ViewHelper.unhidePassword(eyeLoginPassword);
+        ViewHelper_methods.unhidePassword(eyeLoginPassword);
     }
 
 //    ---------- Setter/Getter ----------
 
-    public static String getEmailInCreateAccountPassword() {
-        return emailInCreateAccountPassword;
+    public static String getEmail() {
+        return email;
     }
 
-    public static void setEmailInCreateAccountPassword(String emailInCreateAccountPassword) {
-        ViewController_createAccountPassword.emailInCreateAccountPassword = emailInCreateAccountPassword;
+    public static void setEmail(String email) {
+        ViewController_createAccountPassword.email = email;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    @FXML
+    public void setPassword(String password) {
+        passwortFieldAccount.setText(password);
+        ViewController_createAccountPassword.password = password;
     }
 }

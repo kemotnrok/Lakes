@@ -1,12 +1,18 @@
 package com.korn.lakes.view;
 
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class ViewHelper {
+public class ViewHelper_methods {
 
+    /**
+     * makes Password temporarly visible
+     * @param element Node
+     */
     protected static void unhidePassword(Node element) {
         try {
             Parent parent = element.getParent();
@@ -30,11 +36,17 @@ public class ViewHelper {
             passwordField.requestFocus();
             passwordField.selectEnd();
 
-
         } catch (Exception e) {
             System.out.println("Passwort-Anzeige-Fehler"); //todo
-            return;
         }
 
     }
+
+    @FXML
+    protected static void nextScene(ViewHelper_changeScene stageComponent){
+        Stage nextStage = stageComponent.getStage();
+        nextStage.setTitle("Lakes to see");
+    }
+
+
 }

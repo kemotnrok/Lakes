@@ -3,9 +3,10 @@ package com.korn.lakes.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class ViewController_createAccountEmail {
+    private static String email;
+    private static String password;
 
     @FXML
     private Button zurueckToLoginEmailFromCreateAccount;
@@ -18,19 +19,20 @@ public class ViewController_createAccountEmail {
 
     @FXML
     protected void onZurueckToLoginEmailFromCreateAccount() {
-        StageComponent stageComponent = new StageComponent(zurueckToLoginEmailFromCreateAccount, "view-loginEmail");
-        stageComponent.getStage().setTitle("Lakes to see");
-        ((ViewController_loginEmail) stageComponent.getController()).setEmailField(createAccountEmail.getText());
-        stageComponent.changeScene();
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(zurueckToLoginEmailFromCreateAccount, "view-loginEmail");
+        ((ViewController_loginEmail) changeScene.getController()).setEmail(createAccountEmail.getText());
+        if(!(password == null)){
+            ((ViewController_createAccountPassword) changeScene.getController()).setPassword(password);
+        }
     }
 
     @FXML
     protected void onWeiterToCreateAccountPassword() {
-        StageComponent stageComponent = new StageComponent(weiterToCreateAccountPassword, "view-createAccountPassword");
-        Stage nextStage = stageComponent.getStage();
-        ViewController_createAccountPassword.setEmailInCreateAccountPassword(createAccountEmail.getText());
-        nextStage.setTitle("Lakes to see");
-        stageComponent.changeScene();
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(weiterToCreateAccountPassword, "view-createAccountPassword");
+        ViewController_createAccountPassword.setEmail(createAccountEmail.getText());
+        if(!(password == null)){
+            ((ViewController_createAccountPassword) changeScene.getController()).setPassword(password);
+        }
     }
 
     /**
@@ -41,4 +43,11 @@ public class ViewController_createAccountEmail {
         createAccountEmail.setText(emailText);
     }
 
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        ViewController_createAccountEmail.password = password;
+    }
 }

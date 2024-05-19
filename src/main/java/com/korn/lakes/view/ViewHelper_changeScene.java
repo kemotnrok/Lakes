@@ -8,33 +8,25 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StageComponent {
-    private Scene scene;
-    private Stage stage;
-    private FXMLLoader fxmlLoader;
-    private Node javafxElement;
-    private Object controller;
+public class ViewHelper_changeScene {
+    private final Stage stage;
+    private final Object controller;
 
     /**
      * Constructor javaFxElement
      * @param javafxElement Node
      * @param view String
      */
-    public StageComponent(Node javafxElement, String view) {
+    public ViewHelper_changeScene(Node javafxElement, String view) {
         try {
-            this.javafxElement = javafxElement;
             stage = (Stage) javafxElement.getScene().getWindow();
-            fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/" + view + ".fxml"));
-            scene = new Scene(fxmlLoader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/" + view + ".fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
             controller = fxmlLoader.getController();
-
+            stage.setScene(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void changeScene() {
-        stage.setScene(scene);
     }
 
     public <T> T getController() {
