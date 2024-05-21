@@ -1,26 +1,41 @@
 package com.korn.lakes.view;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 
-public class ViewController_createAccountPassword {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    private static String email;
-    private static String password;
+public class ViewController_createAccountPassword implements Initializable {
 
     @FXML
     private Button continueToConfirmAccountFromPassword;
-
     @FXML
     private Button backToAccountEmailFromPassword;
-
     @FXML
     private Node eyeLoginPassword;
+    @FXML
+    private PasswordField createAccountPasswordField;
+
+//    --------------------
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateCreateAccountPasswordField();
+    }
 
     @FXML
-    private PasswordField passwortFieldAccount;
+    public void updatePassword() {
+        ViewHelper_tempData.setPassword(createAccountPasswordField.getText());
+    }
+
+    @FXML
+    public void updateCreateAccountPasswordField() {
+        createAccountPasswordField.setText(ViewHelper_tempData.getPassword());
+    }
 
     @FXML
     protected void onContinueToConfirmAccount(){
@@ -30,10 +45,6 @@ public class ViewController_createAccountPassword {
     @FXML
     protected void onBackToLoginEmail() {
         ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToAccountEmailFromPassword, "view-loginEmail");
-        ((ViewController_loginEmail) changeScene.getController()).updateEmailField(email);
-        if (!(passwortFieldAccount.getText() == null)) {
-            ViewController_createAccountEmail.setPassword(passwortFieldAccount.getText());
-        }
     }
 
     @FXML
@@ -41,23 +52,4 @@ public class ViewController_createAccountPassword {
         ViewHelper_diverseMethods.unhidePassword(eyeLoginPassword);
     }
 
-//    ---------- Setter/Getter ----------
-
-    public static String getEmail() {
-        return email;
-    }
-
-    public static void setEmail(String email) {
-        ViewController_createAccountPassword.email = email;
-    }
-
-    public static String getPassword() {
-        return password;
-    }
-
-    @FXML
-    public void setPassword(String password) {
-        passwortFieldAccount.setText(password);
-        ViewController_createAccountPassword.password = password;
-    }
 }

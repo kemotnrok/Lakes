@@ -1,11 +1,11 @@
 package com.korn.lakes.view;
 
 public class ViewHelper_tempData {
-    private static String email;
-    private static String password;
+    private static String email = "";
+    private static String password = "";
 
 //    Getter/Setter
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 

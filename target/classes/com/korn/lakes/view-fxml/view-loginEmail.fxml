@@ -24,8 +24,7 @@
               text="Anmelden">
         </Text>
         <Text layoutX="70.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail"/>
-        <TextField fx:id="emailField" accessibleHelp="this is help" accessibleRoleDescription="This is a description"
-                   accessibleText="E-Mail" layoutX="70.0" layoutY="188.0" onAction="#onFocusOnNext"
+        <TextField fx:id="emailField" layoutX="70.0" layoutY="188.0" onAction="#onFocusOnNext"
                    onKeyTyped="#updateEmail" prefHeight="35.0" prefWidth="300.0">
             <padding>
                 <Insets left="7.0" right="7.0"/>

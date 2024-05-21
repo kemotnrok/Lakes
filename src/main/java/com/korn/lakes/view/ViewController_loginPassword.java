@@ -1,39 +1,35 @@
 package com.korn.lakes.view;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 
-public class ViewController_loginPassword {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    private static String email;
-    private static String password;
+public class ViewController_loginPassword implements Initializable {
 
     @FXML
     private Button backToLoginEmail;
-
     @FXML
     private Button continueToLandingPage;
-
     @FXML
     private Node eyeLoginPassword;
-
     @FXML
     private PasswordField passwordField;
 
-//    ---------- methods ----------
+//    --------------------
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        updatePasswordField();
+    }
 
     @FXML
     protected void onBackToLoginEmail() {
         ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToLoginEmail, "view-loginEmail");
-        ViewController_loginEmail controller = changeScene.getController();
-        controller.updateEmailField(email);
-        if (!(passwordField.getText() == null)) {
-            ViewController_loginEmail.setPassword(passwordField.getText());
-        }
-        System.out.println(ViewController_loginEmail.getEmail()); // todo
-
     }
 
     @FXML
@@ -42,28 +38,17 @@ public class ViewController_loginPassword {
     }
 
     @FXML
-    protected void showPasswordLogin() {
-        ViewHelper_diverseMethods.unhidePassword(eyeLoginPassword);
-    }
-
-//    ---------- setter/getter ----------
-
-    public static String getEmail() {
-        return email;
-    }
-
-    public static void setEmail(String email) {
-        ViewController_loginPassword.email = email;
-    }
-
-    public static String getPassword() {
-        return password;
+    public void updatePassword() {
+        ViewHelper_tempData.setPassword(passwordField.getText());
     }
 
     @FXML
-    public void setPassword(String password) {
-        passwordField.setText(password);
-        ViewController_loginPassword.password = password;
-        ViewHelper_tempData.setPassword(password);
+    public void updatePasswordField() {
+        passwordField.setText(ViewHelper_tempData.getPassword());
+    }
+
+    @FXML
+    protected void showPasswordLogin() {
+        ViewHelper_diverseMethods.unhidePassword(eyeLoginPassword);
     }
 }

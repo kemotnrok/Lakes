@@ -1,57 +1,51 @@
 package com.korn.lakes.view;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class ViewController_loginEmail {
-    private static String email;
-    private static String password;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-//    ---------- FX-elements ----------
+public class ViewController_loginEmail implements Initializable {
+
     @FXML
     private TextField emailField;
-
     @FXML
     private Hyperlink createAccount;
-
     @FXML
     private Button continueToLoginPassword;
-
     @FXML
     private static Text infoText;
 
-//    ---------- methods ----------
+//    --------------------
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateEmailField();
+    }
 
     @FXML
     protected void onCreateAccount() {
         ViewHelper_changeScene changeScene = new ViewHelper_changeScene(createAccount, "view-createAccountEmail");
-        ((ViewController_createAccountEmail) changeScene.getController()).setEmail(emailField.getText());
-        if (!(password == null)) {
-            ViewController_createAccountEmail.setPassword(password);
-        }
     }
 
     @FXML
     protected void onContinueToLoginPassword() {
         ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToLoginPassword, "view-loginPassword");
-        ViewController_loginPassword.setEmail(emailField.getText());
-        if (!(password == null)) {
-            ((ViewController_loginPassword) changeScene.getController()).setPassword(password);
-        }
     }
 
     @FXML
     public void updateEmail() {
-        setEmail(emailField.getText());
+        ViewHelper_tempData.setEmail(emailField.getText());
     }
 
     @FXML
-    public void updateEmailField(String text) {
-        emailField.setText(text);
-        updateEmail();
+    public void updateEmailField() {
+        emailField.setText(ViewHelper_tempData.getEmail());
     }
     
     @FXML
@@ -70,23 +64,5 @@ public class ViewController_loginEmail {
         } else {
             emailField.getStyleClass().remove("my-text-field");
         }
-    }
-
-//    ---------- getter/setter ----------
-
-    public static String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        ViewController_loginEmail.email = email;
-    }
-
-    public static String getPassword() {
-        return password;
-    }
-
-    public static void setPassword(String password) {
-        ViewController_loginEmail.password = password;
     }
 }
