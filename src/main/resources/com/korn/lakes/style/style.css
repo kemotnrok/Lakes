@@ -20,3 +20,8 @@ Button{
     -fx-font-size: 22;
 }
 
+.warning{
+    -fx-text-fill: #C81E1E;
+}
+
+

@@ -5,11 +5,11 @@ public class ViewHelper_tempData {
     private static String password;
 
 //    Getter/Setter
-    public String getTempEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public static void setTempEmail(String email) {
+    public static void setEmail(String email) {
         ViewHelper_tempData.email = email;
     }
 

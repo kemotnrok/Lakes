@@ -1,5 +1,9 @@
 # Login-Project
 
+- [ ] Email verifizieren
+- [ ] Passwort verifizieren
+- [ ] an Datenbank anbinden
+
 ## Salt
 - [ ] SecureRandom, 16/32 Byte
 ```
@@ -13,6 +17,7 @@ String saltString = Base64.getUrlEncoder().encodeToString(salt);
 ## Hash
 - [ ] PBKDF2WithHmacSHA1 oder bcrypt
 - [ ] Unabhängig von der gewählten Methode ist es wichtig, den Salt nicht zusammen mit dem Passwort-Hash zu übertragen
+- [ ] KeyEvent ENTER einrichten für Weiter
 
 ### prepaired statement
 ```

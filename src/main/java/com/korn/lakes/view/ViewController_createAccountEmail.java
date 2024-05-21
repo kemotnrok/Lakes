@@ -9,26 +9,26 @@ public class ViewController_createAccountEmail {
     private static String password;
 
     @FXML
-    private Button zurueckToLoginEmailFromCreateAccount;
+    private Button backToLoginEmailFromCreateAccount;
 
     @FXML
-    private Button weiterToCreateAccountPassword;
+    private Button continueToCreateAccountPassword;
 
     @FXML
     private TextField createAccountEmail;
 
     @FXML
-    protected void onZurueckToLoginEmailFromCreateAccount() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(zurueckToLoginEmailFromCreateAccount, "view-loginEmail");
-        ((ViewController_loginEmail) changeScene.getController()).setEmail(createAccountEmail.getText());
+    protected void onBackToLoginEmailFromCreateAccount() {
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToLoginEmailFromCreateAccount, "view-loginEmail");
+        ((ViewController_loginEmail) changeScene.getController()).updateEmailField(createAccountEmail.getText());
         if(!(password == null)){
-            ((ViewController_createAccountPassword) changeScene.getController()).setPassword(password);
+            ViewController_loginEmail.setPassword(password);
         }
     }
 
     @FXML
-    protected void onWeiterToCreateAccountPassword() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(weiterToCreateAccountPassword, "view-createAccountPassword");
+    protected void onContinueToCreateAccountPassword() {
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
         ViewController_createAccountPassword.setEmail(createAccountEmail.getText());
         if(!(password == null)){
             ((ViewController_createAccountPassword) changeScene.getController()).setPassword(password);

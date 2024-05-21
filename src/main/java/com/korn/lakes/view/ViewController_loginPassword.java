@@ -11,10 +11,10 @@ public class ViewController_loginPassword {
     private static String password;
 
     @FXML
-    private Button zurueckToLoginEmail;
+    private Button backToLoginEmail;
 
     @FXML
-    private Button weiterToLandingPage;
+    private Button continueToLandingPage;
 
     @FXML
     private Node eyeLoginPassword;
@@ -22,29 +22,31 @@ public class ViewController_loginPassword {
     @FXML
     private PasswordField passwordField;
 
-//    ---------- Methoden ----------
+//    ---------- methods ----------
 
     @FXML
-    protected void onZurueckToLoginEmail() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(zurueckToLoginEmail, "view-loginEmail");
-        ViewController_loginEmail controller = ((ViewController_loginEmail) changeScene.getController());
-        controller.setEmail(email);
+    protected void onBackToLoginEmail() {
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToLoginEmail, "view-loginEmail");
+        ViewController_loginEmail controller = changeScene.getController();
+        controller.updateEmailField(email);
         if (!(passwordField.getText() == null)) {
             ViewController_loginEmail.setPassword(passwordField.getText());
         }
+        System.out.println(ViewController_loginEmail.getEmail()); // todo
+
     }
 
     @FXML
-    protected void onWeiterToLandingPage() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(weiterToLandingPage, "view-landingPage");
+    protected void onContinueToLandingPage() {
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToLandingPage, "view-landingPage");
     }
 
     @FXML
     protected void showPasswordLogin() {
-        ViewHelper_methods.unhidePassword(eyeLoginPassword);
+        ViewHelper_diverseMethods.unhidePassword(eyeLoginPassword);
     }
 
-//    ---------- Setter/Getter ----------
+//    ---------- setter/getter ----------
 
     public static String getEmail() {
         return email;
@@ -62,5 +64,6 @@ public class ViewController_loginPassword {
     public void setPassword(String password) {
         passwordField.setText(password);
         ViewController_loginPassword.password = password;
+        ViewHelper_tempData.setPassword(password);
     }
 }

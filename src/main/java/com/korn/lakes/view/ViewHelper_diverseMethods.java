@@ -1,21 +1,21 @@
 package com.korn.lakes.view;
 
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class ViewHelper_methods {
+import java.util.regex.Pattern;
+
+public class ViewHelper_diverseMethods {
 
     /**
-     * makes Password temporarly visible
-     * @param element Node
+     * Makes Password visible
+     * @param fxElement Node
      */
-    protected static void unhidePassword(Node element) {
+    protected static void unhidePassword(Node fxElement) {
         try {
-            Parent parent = element.getParent();
+            Parent parent = fxElement.getParent();
 
             PasswordField passwordField = null;
             TextField textField = null;
@@ -42,11 +42,26 @@ public class ViewHelper_methods {
 
     }
 
-    @FXML
-    protected static void nextScene(ViewHelper_changeScene stageComponent){
-        Stage nextStage = stageComponent.getStage();
-        nextStage.setTitle("Lakes to see");
+    /**
+     * Checks if email is valid
+     * @param email String
+     * @return boolean
+     */
+    protected static boolean validateEmail(String email){
+        final String EMAIL_REGEX = "^[a-z0-9_+&*-.]+@([a-z0-9-]+\\.)+[a-z]{2,3}$";
+        Pattern emailPattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+        return emailPattern.matcher(email).matches();
     }
+    // Todo Apache-Bibliothek einbinden
 
+    /**
+     * Checks if password is valid
+     * @param password String
+     * @return boolean
+     */
+    protected boolean validatePassword(String password){
+        return true;
 
+    }
+    // Todo
 }

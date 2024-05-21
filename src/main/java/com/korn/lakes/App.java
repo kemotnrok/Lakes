@@ -32,3 +32,7 @@ public class App extends Application {
         launch();
     }
 }
+
+// TODO: Vereinfachen: E-Mail in der Klasse ViewController_LoginEmail in der statischen Variable email speichern,
+//  onKeyTyped updaten mit updateEmail
+//  und nur von dort in anderen Klassen mit ViewController_LoginEmail.getEmail() holen

@@ -19,6 +19,6 @@
       <padding>
          <Insets left="7.0" right="7.0" />
       </padding></TextField>
-   <Button fx:id="zurueckToLoginEmailFromCreateAccount" layoutX="247.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#onZurueckToLoginEmailFromCreateAccount" text="Zurück" />
-   <Button fx:id="weiterToCreateAccountPassword" layoutX="315.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#onWeiterToCreateAccountPassword" text="Weiter" />
+   <Button fx:id="backToLoginEmailFromCreateAccount" layoutX="247.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#onBackToLoginEmailFromCreateAccount" onAction="#onBackToLoginEmailFromCreateAccount" text="Zurück" />
+   <Button fx:id="continueToCreateAccountPassword" layoutX="315.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#onContinueToCreateAccountPassword" onAction="#onContinueToCreateAccountPassword" text="Weiter" />
 </Pane>
