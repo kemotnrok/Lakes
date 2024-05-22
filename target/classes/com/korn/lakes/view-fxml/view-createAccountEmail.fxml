@@ -19,11 +19,11 @@
       <padding>
          <Insets left="7.0" right="7.0" />
       </padding></TextField>
-   <Button fx:id="continueToCreateAccountPassword" layoutX="315.0" layoutY="260.0" mnemonicParsing="false" onAction="#onContinueToCreateAccountPassword" onMouseClicked="#onContinueToCreateAccountPassword" text="Weiter">
+   <Button fx:id="backToLoginEmailFromCreateAccount" layoutX="247.0" layoutY="260.0" mnemonicParsing="false" onAction="#onBackToLoginEmailFromCreateAccount" onMouseClicked="#onBackToLoginEmailFromCreateAccount" text="Zurück">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor></Button>
-   <Button fx:id="backToLoginEmailFromCreateAccount" layoutX="247.0" layoutY="260.0" mnemonicParsing="false" onAction="#onBackToLoginEmailFromCreateAccount" onMouseClicked="#onBackToLoginEmailFromCreateAccount" text="Zurück">
+   <Button fx:id="continueToCreateAccountPassword" layoutX="315.0" layoutY="260.0" mnemonicParsing="false" onAction="#onContinueToCreateAccountPassword" onMouseClicked="#onContinueToCreateAccountPassword" text="Weiter">
       <cursor>
          <Cursor fx:constant="HAND" />
       </cursor></Button>
