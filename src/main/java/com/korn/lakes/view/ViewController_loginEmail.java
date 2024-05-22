@@ -3,7 +3,6 @@ package com.korn.lakes.view;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -19,44 +18,61 @@ public class ViewController_loginEmail implements Initializable {
     @FXML
     private Button continueToLoginPassword;
     @FXML
-    private static Text infoText;
+    private Text infoField;
 
 //    --------------------
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateEmailField();
+        emailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
+            if (!newFocus) {
+                validateEmailOnFocusLeft();
+            }
+        });
+
+        //        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+//            if (event.getCode() == KeyCode.ENTER) {
+//                button.fire();
+//            }
+//        }); todo weil auf dem Mac die Leertaste die Buttons auslöst
     }
 
     @FXML
-    protected void onCreateAccount() {
+    private void onCreateAccount() {
         ViewHelper_changeScene changeScene = new ViewHelper_changeScene(createAccount, "view-createAccountEmail");
     }
 
     @FXML
-    protected void onContinueToLoginPassword() {
+    private void onContinueToLoginPassword() {
         ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToLoginPassword, "view-loginPassword");
     }
 
     @FXML
-    public void updateEmail() {
+    private void updateEmail() {
         ViewHelper_tempData.setEmail(emailField.getText());
+        if (ViewHelper_diverseMethods.validateEmail(emailField.getText())) {
+            resetEmailFields();}
     }
 
     @FXML
-    public void updateEmailField() {
+    private void updateEmailField() {
         emailField.setText(ViewHelper_tempData.getEmail());
     }
 
     @FXML
-    public void validateEmail() {
+    private void validateEmailOnFocusLeft() {
         if( ! ViewHelper_diverseMethods.validateEmail(emailField.getText())){
-            infoText.getStyleClass().add("warning");
-            System.out.println(ViewController_loginEmail.infoText.getText());
-            ViewController_loginEmail.infoText.setText("Bitte geben Sie eine gültige E-Mail ein");
-            System.out.println(ViewController_loginEmail.infoText.getText());
-        } else {
-            emailField.getStyleClass().remove("my-text-field");
-        }
+            emailField.getStyleClass().add("warning");
+            infoField.setText("Geben Sie eine gültige E-Mail ein:");
+            emailField.requestFocus();
+            emailField.selectEnd();
+        } else resetEmailFields();
+    }
+
+    @FXML
+    private void resetEmailFields() {
+        emailField.getStyleClass().remove("warning");
+        infoField.setText("E-Mail");
     }
 }

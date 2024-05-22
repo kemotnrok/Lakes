@@ -1,6 +1,6 @@
 # Login-Project
 
-- [ ] E-Mail verifizieren
+- [x] E-Mail verifizieren
 - [ ] Passwort verifizieren
 - [ ] Passwort vergessen
 - [ ] Passwort confirm im E-Mail
