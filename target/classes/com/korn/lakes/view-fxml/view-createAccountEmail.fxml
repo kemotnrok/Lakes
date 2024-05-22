@@ -15,10 +15,16 @@
    <Text fill="#333333" layoutX="70.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline" text="Konto erstellen">
    </Text>
    <Text layoutX="70.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail" />
-   <TextField fx:id="createAccountEmailField" onKeyTyped="#updateEmail" layoutX="70.0" layoutY="188.0" prefHeight="35.0" prefWidth="300.0">
+   <TextField fx:id="createAccountEmailField" layoutX="70.0" layoutY="188.0" onAction="#onContinueToCreateAccountPassword" onKeyTyped="#updateEmail" prefHeight="35.0" prefWidth="300.0">
       <padding>
          <Insets left="7.0" right="7.0" />
       </padding></TextField>
-   <Button fx:id="backToLoginEmailFromCreateAccount" layoutX="247.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#onBackToLoginEmailFromCreateAccount" onAction="#onBackToLoginEmailFromCreateAccount" text="Zurück" />
-   <Button fx:id="continueToCreateAccountPassword" layoutX="315.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#onContinueToCreateAccountPassword" onAction="#onContinueToCreateAccountPassword" text="Weiter" />
+   <Button fx:id="continueToCreateAccountPassword" layoutX="315.0" layoutY="260.0" mnemonicParsing="false" onAction="#onContinueToCreateAccountPassword" onMouseClicked="#onContinueToCreateAccountPassword" text="Weiter">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></Button>
+   <Button fx:id="backToLoginEmailFromCreateAccount" layoutX="247.0" layoutY="260.0" mnemonicParsing="false" onAction="#onBackToLoginEmailFromCreateAccount" onMouseClicked="#onBackToLoginEmailFromCreateAccount" text="Zurück">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></Button>
 </Pane>

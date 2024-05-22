@@ -15,7 +15,7 @@ public class ViewController_loginEmail implements Initializable {
     @FXML
     private TextField emailField;
     @FXML
-    private Hyperlink createAccount;
+    private Button createAccount;
     @FXML
     private Button continueToLoginPassword;
     @FXML
@@ -46,12 +46,6 @@ public class ViewController_loginEmail implements Initializable {
     @FXML
     public void updateEmailField() {
         emailField.setText(ViewHelper_tempData.getEmail());
-    }
-    
-    @FXML
-    public void onFocusOnNext(){
-        validateEmail();
-        continueToLoginPassword.requestFocus();
     }
 
     @FXML

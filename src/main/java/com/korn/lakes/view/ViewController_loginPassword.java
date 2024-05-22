@@ -19,6 +19,8 @@ public class ViewController_loginPassword implements Initializable {
     private Node eyeLoginPassword;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button forgotPassword;
 
 //    --------------------
 

@@ -1,26 +1,47 @@
-Hyperlink:visited, Hyperlink:armed{
-    -fx-border-width: 0;
-}
+/*Hyperlink:visited, Hyperlink:armed {*/
+/*    -fx-border-width: 0;*/
+/*}*/
 
-Text, TextField, PasswordField, Label, Button, CheckBox, Hyperlink{
+Text, TextField, PasswordField, Label, Button, CheckBox, Hyperlink {
     -fx-font-family: Rubik;
     -fx-font-weight: normal;
     -fx-font-size: 15;
 }
 
-Button{
+Button {
     -fx-font-size: 13;
 }
 
-.bold{
+.buttonAsText {
+    -fx-background-color: #f5f5f5;
+    -fx-font-size: 15;
+    -fx-border-radius: 3px;
+    -fx-padding: 3px 8px 4px 8px;
+}
+
+.buttonAsText:focused {
+    -fx-border-color: -fx-focus-color;
+    -fx-effect: innershadow( three-pass-box , rgba(30,136,229,0.8) , 5, 0.2 , 0 , 0 );
+}
+
+.buttonAsText:hover {
+    -fx-background-color: #fafafa;
+    -fx-effect: dropshadow(gaussian , darkgray , 2, 0.5, 0 , 0);
+}
+
+.buttonAsText:pressed {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+.bold {
     -fx-font-weight: bold;
 }
 
-.headline{
+.headline {
     -fx-font-size: 22;
 }
 
-.warning{
+.warning {
     -fx-text-fill: #C81E1E;
 }
 
