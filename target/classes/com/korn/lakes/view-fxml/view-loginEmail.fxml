@@ -16,7 +16,7 @@
         <Text fill="#333333" layoutX="70.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headline" text="Anmelden">
         </Text>
         <Text fx:id="infoField" layoutX="70.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail" />
-        <TextField fx:id="emailField" layoutX="70.0" layoutY="188.0" onAction="#onContinueToLoginPassword" onKeyTyped="#updateEmail" prefHeight="35.0" prefWidth="300.0">
+        <TextField fx:id="emailField" layoutX="70.0" layoutY="188.0" onAction="#onContinueToLoginPassword" prefHeight="35.0" prefWidth="300.0">
             <padding>
                 <Insets left="7.0" right="7.0" />
             </padding>

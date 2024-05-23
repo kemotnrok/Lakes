@@ -49,7 +49,7 @@ public class ViewController_createAccountPassword implements Initializable {
 
     @FXML
     protected void showPasswordLogin(){
-        ViewHelper_diverseMethods.unhidePassword(eyeLoginPassword);
+        ViewHelper_diverseMethods.showPassword(eyeLoginPassword);
     }
 
 }

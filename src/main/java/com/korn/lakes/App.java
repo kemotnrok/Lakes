@@ -3,6 +3,9 @@ package com.korn.lakes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -11,6 +14,12 @@ import java.util.Objects;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
+//        Stellt sicher, dass Buttons am Mac mit der Eingabetaste bestätigt werden
+        stage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() != KeyCode.ENTER) return;
+            if ((event.getTarget() instanceof Button)) ((Button) event.getTarget()).fire();
+        });
 
 //        Font laden
         try {

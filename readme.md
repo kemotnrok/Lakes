@@ -37,3 +37,9 @@ try (Connection connection = DriverManager.getConnection(url, user, password)) {
     e.printStackTrace();
 }
 ```
+## Code-Schnipsel
+//        Todo: Überprüfen, ob die Enter-Taste am Mac funktioniert:
+//        emailField.getParent().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+//            if (event.getCode() != KeyCode.ENTER) return;
+//            if ((event.getTarget() instanceof Button)) ((Button) event.getTarget()).fire();
+//        });
