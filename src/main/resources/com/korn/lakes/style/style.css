@@ -41,4 +41,9 @@ Button {
     -fx-text-fill: #C81E1E;
 }
 
+.info{
+    -fx-font-size: 11;
+    -fx-fill: #888888;
+}
+
 

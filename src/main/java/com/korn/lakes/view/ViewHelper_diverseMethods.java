@@ -50,8 +50,8 @@ public class ViewHelper_diverseMethods {
      * @return boolean
      */
     protected static boolean validateEmail(String email) {
-//        final String EMAIL_REGEX = "^[a-z0-9_+&*-.]+@([a-z0-9-]+\\.)+[a-z]{2,3}$";
-        final String EMAIL_REGEX = ".*"; // todo: zum Coden Validierung ausgeschalten
+        final String EMAIL_REGEX = "^[a-z0-9_+&*-.]+@([a-z0-9-]+\\.)+[a-z]{2,3}$";
+//        final String EMAIL_REGEX = ".*"; // todo: zum Coden Validierung ausgeschalten
         Pattern emailPattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
         return emailPattern.matcher(email).matches();
         // Todo: evtl. Apache-Bibliothek einbinden
@@ -63,9 +63,9 @@ public class ViewHelper_diverseMethods {
      * @return boolean
      */
     protected static boolean validatePassword(String password) {
-//        final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
-//        final String PASSWORD_REGEX = "^(?:(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)|(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_])|(?=.*[a-z])(?=.*\\d)(?=.*[\\W_])|(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_])).{8,}$";
-        final String PASSWORD_REGEX = ".*"; // todo: zum Coden Validierung ausgeschalten
+//        final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$"; // einfacher
+        final String PASSWORD_REGEX = "^(?:(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)|(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_])|(?=.*[a-z])(?=.*\\d)(?=.*[\\W_])|(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_])).{8,}$";
+//        final String PASSWORD_REGEX = ".*"; // todo: zum Coden Validierung ausgeschalten
         Pattern passwordPattern = Pattern.compile(PASSWORD_REGEX);
         return passwordPattern.matcher(password).matches();
     }

@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +24,8 @@ public class ViewController_loginPassword implements Initializable {
     @FXML
     private TextField passwordPlain;
     @FXML
+    private Text infoLoginPassword;
+    @FXML
     private Button forgotPassword;
 
 //    --------------------
@@ -35,13 +38,7 @@ public class ViewController_loginPassword implements Initializable {
             if (isPasswordValid()) actionIfPasswordValid();
             else actionIfPasswordNotvalid();
         });
-
         passwordField.setOnKeyTyped(event-> updatePassword());
-    }
-
-    @FXML
-    protected void onBackToLoginEmail() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToLoginEmail, "view-loginEmail");
     }
 
     @FXML
@@ -50,7 +47,11 @@ public class ViewController_loginPassword implements Initializable {
             actionIfPasswordValid();
             ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
+    }
 
+    @FXML
+    protected void onBackToLoginEmail() {
+        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToLoginEmail, "view-loginEmail");
     }
 
     @FXML
@@ -85,6 +86,7 @@ public class ViewController_loginPassword implements Initializable {
         passwordField.selectEnd();
         continueToLandingPage.setDisable(true);
         passwordField.setOnAction(null);
+        infoLoginPassword.setVisible(true);
     }
 
     @FXML
@@ -93,5 +95,6 @@ public class ViewController_loginPassword implements Initializable {
         passwordPlain.getStyleClass().remove("warning");
         passwordField.setOnAction(event -> onContinueToLandingPage());
         continueToLandingPage.setDisable(false);
+        infoLoginPassword.setVisible(false);
     }
 }

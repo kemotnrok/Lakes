@@ -4,9 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,8 +16,6 @@ public class ViewController_loginEmail implements Initializable {
     private Button createAccount;
     @FXML
     private Button continueToLoginPassword;
-    @FXML
-    private Text infoField;
 
 //    --------------------
 
@@ -81,6 +76,7 @@ public class ViewController_loginEmail implements Initializable {
     @FXML
     private void actionIfEmailValid() {
         emailField.getStyleClass().remove("warning");
+        emailField.selectEnd();
         emailField.setOnAction(event -> onContinueToLoginPassword());
         continueToLoginPassword.setDisable(false);
     }
