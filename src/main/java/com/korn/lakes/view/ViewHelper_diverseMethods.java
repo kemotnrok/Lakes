@@ -52,7 +52,7 @@ public class ViewHelper_diverseMethods {
         Pattern emailPattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
         return emailPattern.matcher(email).matches();
     }
-    // Todo Apache-Bibliothek einbinden
+    // Todo: evtl. Apache-Bibliothek einbinden
 
     /**
      * Checks if password is valid
