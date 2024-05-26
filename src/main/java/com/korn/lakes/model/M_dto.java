@@ -1,45 +1,32 @@
 package com.korn.lakes.model;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class M_dto {
-    String urlUsers = "jdbc:sqlite:db/users_db.db";
-    String urlLakes = "jdbc:sqlite:db/lakes_db.db";
 
+    static String path = "jdbc:sqlite:src/main/resources/com/korn/lakes/db/%s.db";
 
-    private ResultSet transactDb(M_Transactions transaction, String[] sqlStatements, M_Databases db) {
-        try (Connection conn = DriverManager.getConnection(urlLakes, "", "");
+    protected static void dtoUpdateDb(ArrayList<String> sqlStatements, M_databases db) {
+        String url = String.format(path, db);
+        try (Connection conn = DriverManager.getConnection(url, "", "");
              Statement stmt = conn.createStatement()) {
-
-            switch (transaction) {
-                case M_Transactions.CREATE:
-                    create //todo
-                case M_Transactions.READ:
-                    read //todo
-                case M_Transactions.UPDATE:
-                    return updateDb(stmt, sqlStatements); //todo
+            for (String sqlStmt : sqlStatements) {
+                stmt.executeUpdate(sqlStmt);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    /**
-     * updates database – accesses the statements in sqlStatements
-     *
-     * @param stmt          Statement
-     * @param sqlStatements ArrayList<String>
-     * @throws SQLException e
-     */
-    private static boolean updateDb(Statement stmt, String[] sqlStatements) throws SQLException {
-        try {
-            for (String sql : sqlStatements) {
-                stmt.executeUpdate(sql);
-            }
-            return true;
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage()); //todo
-            return false;
+    protected static ResultSet dtoQueryDb(String sqlStatement, M_databases db) {
+        String url = String.format(path, db);
+        try (Connection conn = DriverManager.getConnection(url, "", "");
+             Statement stmt = conn.createStatement()) {
+            return stmt.executeQuery(sqlStatement);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
+

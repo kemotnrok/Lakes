@@ -11,4 +11,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Lakes" options="--add-exports java.base/sun.security.util=com.korn.lakes" />
+    </option>
+  </component>
 </project>
