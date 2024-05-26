@@ -1,5 +1,7 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_Helper_diversMethods;
+import com.korn.lakes.controller.C_Helper_tempData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,7 +10,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewController_loginEmail implements Initializable {
+public class V_Controller_loginEmail implements Initializable {
 
     @FXML
     private TextField emailField;
@@ -35,31 +37,31 @@ public class ViewController_loginEmail implements Initializable {
 
     @FXML
     private void onCreateAccount() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(createAccount, "view-createAccountEmail");
+        V_Helper_changeScene changeScene = new V_Helper_changeScene(createAccount, "view-createAccountEmail");
     }
 
     @FXML
     private void onContinueToLoginPassword() {
         if (isEmailValid()) {
-            actionIfEmailNotvalid();
-            ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToLoginPassword, "view-loginPassword");
+            actionIfEmailValid();
+            V_Helper_changeScene changeScene = new V_Helper_changeScene(continueToLoginPassword, "view-loginPassword");
         } else actionIfEmailNotvalid();
     }
 
     @FXML
     private void updateEmail() {
-        ViewHelper_tempData.setEmail(emailField.getText());
+        C_Helper_tempData.setEmail(emailField.getText());
         if (isEmailValid()) actionIfEmailValid();
     }
 
     @FXML
     private void updateEmailField() {
-        emailField.setText(ViewHelper_tempData.getEmail());
+        emailField.setText(C_Helper_tempData.getEmail());
     }
 
     @FXML
     private boolean isEmailValid() {
-        return ViewHelper_diverseMethods.validateEmail(emailField.getText());
+        return V_Helper_diversMethods.validateEmail(emailField.getText());
     }
 
     @FXML
@@ -79,5 +81,10 @@ public class ViewController_loginEmail implements Initializable {
         emailField.selectEnd();
         emailField.setOnAction(event -> onContinueToLoginPassword());
         continueToLoginPassword.setDisable(false);
+    }
+
+    @FXML
+    private boolean isEmailInDb(){
+        return C_Helper_diversMethods.checkEmailDb(emailField.getText());
     }
 }

@@ -1,5 +1,6 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_Helper_tempData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,7 +9,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewController_createAccountEmail implements Initializable {
+public class V_Controller_createAccountEmail implements Initializable {
 
     @FXML
     private Button backToLoginEmailFromCreateAccount;
@@ -22,7 +23,7 @@ public class ViewController_createAccountEmail implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        updateCreateAccountEmailField(ViewHelper_tempData.getEmail());
+        updateCreateAccountEmailField(C_Helper_tempData.getEmail());
 
         createAccountEmailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -35,31 +36,31 @@ public class ViewController_createAccountEmail implements Initializable {
 
     @FXML
     protected void onBackToLoginEmailFromCreateAccount() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToLoginEmailFromCreateAccount, "view-loginEmail");
+        V_Helper_changeScene changeScene = new V_Helper_changeScene(backToLoginEmailFromCreateAccount, "view-loginEmail");
     }
 
     @FXML
     protected void onContinueToCreateAccountPassword() {
         if (isEmailValid()) {
             actionIfEmailNotvalid();
-            ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
+            V_Helper_changeScene changeScene = new V_Helper_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
         } else actionIfEmailNotvalid();
     }
 
     @FXML
     public void updateEmail() {
-        ViewHelper_tempData.setEmail(createAccountEmailField.getText());
+        C_Helper_tempData.setEmail(createAccountEmailField.getText());
         if (isEmailValid()) actionIfEmailValid();
     }
 
     @FXML
     public void updateCreateAccountEmailField(String text) {
-        createAccountEmailField.setText(ViewHelper_tempData.getEmail());
+        createAccountEmailField.setText(C_Helper_tempData.getEmail());
     }
 
     @FXML
     private boolean isEmailValid() {
-        return ViewHelper_diverseMethods.validateEmail(createAccountEmailField.getText());
+        return V_Helper_diversMethods.validateEmail(createAccountEmailField.getText());
     }
 
     @FXML

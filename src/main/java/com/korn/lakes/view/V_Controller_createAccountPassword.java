@@ -1,5 +1,6 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_Helper_tempData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -11,7 +12,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewController_createAccountPassword implements Initializable {
+public class V_Controller_createAccountPassword implements Initializable {
 
     @FXML
     private Button continueToConfirmAccountFromPassword;
@@ -44,34 +45,35 @@ public class ViewController_createAccountPassword implements Initializable {
     protected void onContinueToConfirmAccount(){
         if (isPasswordValid()) {
             actionIfPasswordValid();
-            ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
+
+            V_Helper_changeScene changeScene = new V_Helper_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
         } else actionIfPasswordNotvalid();
     }
 
     @FXML
     protected void onBackToCreateAccountEmail() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToAccountEmailFromPassword, "view-createAccountEmail");
+        V_Helper_changeScene changeScene = new V_Helper_changeScene(backToAccountEmailFromPassword, "view-createAccountEmail");
     }
 
     @FXML
     public void updatePassword() {
-        ViewHelper_tempData.setPassword(createAccountPasswordField.getText());
+        C_Helper_tempData.setPassword(createAccountPasswordField.getText());
         if (isPasswordValid()) actionIfPasswordValid();
     }
 
     @FXML
     public void updateCreateAccountPasswordField() {
-        createAccountPasswordField.setText(ViewHelper_tempData.getPassword());
+        createAccountPasswordField.setText(C_Helper_tempData.getPassword());
     }
 
     @FXML
     protected void showPasswordLogin(){
-        ViewHelper_diverseMethods.showPassword(eyeLoginPassword);
+        V_Helper_diversMethods.showPassword(eyeLoginPassword);
     }
 
     @FXML
     private boolean isPasswordValid() {
-        return ViewHelper_diverseMethods.validatePassword(createAccountPasswordField.getText());
+        return V_Helper_diversMethods.validatePassword(createAccountPasswordField.getText());
     }
 
     @FXML
@@ -94,5 +96,10 @@ public class ViewController_createAccountPassword implements Initializable {
         createAccountPasswordField.setOnAction(event -> onContinueToConfirmAccount());
         continueToConfirmAccountFromPassword.setDisable(false);
         infoCreateAccountPassword.setVisible(false);
+    }
+
+    @FXML
+    private void writeEmail(){
+
     }
 }

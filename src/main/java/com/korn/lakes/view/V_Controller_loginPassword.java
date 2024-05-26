@@ -1,5 +1,6 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_Helper_tempData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -11,7 +12,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewController_loginPassword implements Initializable {
+public class V_Controller_loginPassword implements Initializable {
 
     @FXML
     private Button backToLoginEmail;
@@ -45,35 +46,35 @@ public class ViewController_loginPassword implements Initializable {
     protected void onContinueToLandingPage() {
         if (isPasswordValid()) {
             actionIfPasswordValid();
-            ViewHelper_changeScene changeScene = new ViewHelper_changeScene(continueToLandingPage, "view-landingPage");
+            V_Helper_changeScene changeScene = new V_Helper_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
     }
 
     @FXML
     protected void onBackToLoginEmail() {
-        ViewHelper_changeScene changeScene = new ViewHelper_changeScene(backToLoginEmail, "view-loginEmail");
+        V_Helper_changeScene changeScene = new V_Helper_changeScene(backToLoginEmail, "view-loginEmail");
     }
 
     @FXML
     public void updatePassword() {
-        ViewHelper_tempData.setPassword(passwordField.getText());
+        C_Helper_tempData.setPassword(passwordField.getText());
         if (isPasswordValid()) actionIfPasswordValid();
     }
 
     @FXML
     public void updatePasswordField() {
-        passwordField.setText(ViewHelper_tempData.getPassword());
+        passwordField.setText(C_Helper_tempData.getPassword());
     }
 
     @FXML
     protected void showPasswordLogin() {
-        ViewHelper_diverseMethods.showPassword(eyeLoginPassword);
+        V_Helper_diversMethods.showPassword(eyeLoginPassword);
         passwordPlain.requestFocus(); // todo: eigentlich kein Fokus / alle Elemente abwählen
     }
 
     @FXML
     private boolean isPasswordValid() {
-        return ViewHelper_diverseMethods.validatePassword(passwordField.getText());
+        return V_Helper_diversMethods.validatePassword(passwordField.getText());
     }
 
     @FXML

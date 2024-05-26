@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 
 import java.util.regex.Pattern;
 
-public class ViewHelper_diverseMethods {
+public class V_Helper_diversMethods {
 
     /**
      * Makes Password visible

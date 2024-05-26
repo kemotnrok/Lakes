@@ -1,6 +1,6 @@
-package com.korn.lakes.view;
+package com.korn.lakes.controller;
 
-public class ViewHelper_tempData {
+public class C_Helper_tempData {
     private static String email = "";
     private static String password = "";
 
@@ -10,7 +10,7 @@ public class ViewHelper_tempData {
     }
 
     public static void setEmail(String email) {
-        ViewHelper_tempData.email = email;
+        C_Helper_tempData.email = email;
     }
 
     public static String getPassword() {
@@ -18,6 +18,6 @@ public class ViewHelper_tempData {
     }
 
     public static void setPassword(String password) {
-        ViewHelper_tempData.password = password;
+        C_Helper_tempData.password = password;
     }
 }
