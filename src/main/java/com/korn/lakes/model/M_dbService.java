@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 public class M_dbService {
 
-    private static final String findUser = "select * from users where e_mail_hash like %s";
-    private static final String insertUser = "INSERT INTO users (e_mail_hash, password_hash, salt) VALUES(%s, %s, %s);";
+    private static final String findUser = "select * from users where e_mail_hash like '%s'";
+    private static final String insertUser = "INSERT INTO users (e_mail_hash, salt) VALUES('%s', '%s');";
+//    private static final String insertUser = "INSERT INTO users (e_mail_hash, password_hash, salt) VALUES('%s', '%s', '%s');";
     private static final String changeUserEmail = "select * from users where e_mail_hash like ?";
     private static final String changeUserPassword = "select * from users where e_mail_hash like ?";
 
@@ -14,7 +15,7 @@ public class M_dbService {
 
     public static void updateDB(String data, M_databases db) {
         ArrayList<String> sqlStmts = new ArrayList<>();
-        sqlStmts.add(String.format(insertUser, data)); //todo drei Argumente
+        sqlStmts.add(String.format(insertUser, data, 102)); //todo drei Argumente
         M_dto.dtoUpdateDb(sqlStmts, db);
         sqlStmts.clear();
     }
