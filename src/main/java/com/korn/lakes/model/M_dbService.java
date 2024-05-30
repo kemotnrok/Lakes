@@ -10,6 +10,7 @@ public class M_dbService {
 //    private static final String insertUser = "INSERT INTO users (e_mail_hash, password_hash, salt) VALUES('%s', '%s', '%s');";
     private static final String changeUserEmail = "select * from users where e_mail_hash like ?";
     private static final String changeUserPassword = "select * from users where e_mail_hash like ?";
+    private static final String deleteUser = "Delete * from users where e_mail_hash like '%s'";
 
 //    ----------
 
