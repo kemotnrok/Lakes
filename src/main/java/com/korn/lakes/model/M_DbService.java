@@ -3,7 +3,7 @@ package com.korn.lakes.model;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class M_dbService {
+public class M_DbService {
 
     private static final String findUser = "select * from users where e_mail_hash like '%s'";
     private static final String insertUser = "INSERT INTO users (e_mail_hash, salt) VALUES('%s', '%s');";
@@ -13,15 +13,15 @@ public class M_dbService {
 
 //    ----------
 
-    public static void updateDB(String data, M_databases db) {
+    public static void updateDB(String data, M_Databases db) {
         ArrayList<String> sqlStmts = new ArrayList<>();
         sqlStmts.add(String.format(insertUser, data, 102)); //todo drei Argumente
-        M_dto.dtoUpdateDb(sqlStmts, db);
+        M_DTO.dtoUpdateDb(sqlStmts, db);
         sqlStmts.clear();
     }
 
-    public static ResultSet queryDB(String data, M_databases db) {
+    public static ResultSet queryDB(String data, M_Databases db) {
         String sqlStmt = String.format(findUser, data);
-        return M_dto.dtoQueryDb(sqlStmt, db);
+        return M_DTO.dtoQueryDb(sqlStmt, db);
     }
 }

@@ -2,8 +2,8 @@ package com.korn.lakes.view;
 
 import com.korn.lakes.controller.C_Helper_diversMethods;
 import com.korn.lakes.controller.C_Helper_tempData;
-import com.korn.lakes.model.M_databases;
-import com.korn.lakes.model.M_dbService;
+import com.korn.lakes.model.M_Databases;
+import com.korn.lakes.model.M_DbService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -47,7 +47,7 @@ public class V_Controller_loginEmail implements Initializable {
         if (isEmailValid()) {
             actionIfEmailValid();
             V_Helper_changeScene changeScene = new V_Helper_changeScene(continueToLoginPassword, "view-loginPassword");
-            M_dbService.updateDB(emailField.getText(), M_databases.users_db);
+            M_DbService.updateDB(emailField.getText(), M_Databases.users_db);
         } else actionIfEmailNotvalid();
     }
 
