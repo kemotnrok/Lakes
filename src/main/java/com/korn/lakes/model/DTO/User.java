@@ -2,7 +2,9 @@ package com.korn.lakes.model.DTO;
 
 public class User {
 
-    private String email, password, salt;
+    private String email = "";
+    private String password = "";
+    private String salt = "";
 
 //    ----------
 

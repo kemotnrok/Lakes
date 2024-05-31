@@ -45,7 +45,6 @@ public class V_Helper_diversMethods {
 
     /**
      * Checks if email is valid
-     *
      * @param email String
      * @return boolean
      */

@@ -1,6 +1,7 @@
 package com.korn.lakes.view;
 
-import com.korn.lakes.controller.C_Helper_tempData;
+import com.korn.lakes.controller.C_SessionData;
+import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -27,11 +28,17 @@ public class V_Controller_createAccountPassword implements Initializable {
     @FXML
     private Text infoCreateAccountPassword;
 
+    User viewUser;
+    User dbUser;
+
+
 
 //    --------------------
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        viewUser = C_SessionData.getViewUser();
+        dbUser = C_SessionData.getDbUser();
         updateCreateAccountPasswordField();
         createAccountPasswordField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -41,29 +48,36 @@ public class V_Controller_createAccountPassword implements Initializable {
         createAccountPasswordField.setOnKeyTyped(event-> updatePassword());
     }
 
+    //    ----------
+
+    private void updateUser(User viewUser) {
+        C_SessionData.setViewUser(viewUser);
+    }
+
     @FXML
     protected void onContinueToConfirmAccount(){
         if (isPasswordValid()) {
+            updateUser(viewUser);
             actionIfPasswordValid();
-
-            V_Helper_changeScene changeScene = new V_Helper_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
+            V_changeScene changeScene = new V_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
         } else actionIfPasswordNotvalid();
     }
 
     @FXML
     protected void onBackToCreateAccountEmail() {
-        V_Helper_changeScene changeScene = new V_Helper_changeScene(backToAccountEmailFromPassword, "view-createAccountEmail");
+        updateUser(viewUser);
+        V_changeScene changeScene = new V_changeScene(backToAccountEmailFromPassword, "view-createAccountEmail");
     }
 
     @FXML
     public void updatePassword() {
-        C_Helper_tempData.setPassword(createAccountPasswordField.getText());
+        viewUser.setPassword(createAccountPasswordField.getText());
         if (isPasswordValid()) actionIfPasswordValid();
     }
 
     @FXML
     public void updateCreateAccountPasswordField() {
-        createAccountPasswordField.setText(C_Helper_tempData.getPassword());
+        createAccountPasswordField.setText(viewUser.getPassword());
     }
 
     @FXML
@@ -100,6 +114,6 @@ public class V_Controller_createAccountPassword implements Initializable {
 
     @FXML
     private void writeEmail(){
-
+//    todo?
     }
 }

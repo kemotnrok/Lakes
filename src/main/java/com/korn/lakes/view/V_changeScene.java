@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class V_Helper_changeScene {
+public class V_changeScene {
     private final Stage stage;
     private final Object controller;
 
@@ -17,7 +17,7 @@ public class V_Helper_changeScene {
      * @param javafxElement Node
      * @param view String
      */
-    public V_Helper_changeScene(Node javafxElement, String view) {
+    public V_changeScene(Node javafxElement, String view) {
         try {
             stage = (Stage) javafxElement.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/" + view + ".fxml"));

@@ -1,6 +1,7 @@
 package com.korn.lakes.view;
 
-import com.korn.lakes.controller.C_Helper_tempData;
+import com.korn.lakes.controller.C_SessionData;
+import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -29,10 +30,16 @@ public class V_Controller_loginPassword implements Initializable {
     @FXML
     private Button forgotPassword;
 
+    User viewUser;
+    User dbUser;
+
+
 //    --------------------
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        viewUser = C_SessionData.getViewUser();
+        dbUser = C_SessionData.getDbUser();
         updatePasswordField();
         passwordField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -45,25 +52,27 @@ public class V_Controller_loginPassword implements Initializable {
     @FXML
     protected void onContinueToLandingPage() {
         if (isPasswordValid()) {
+            updateUser(viewUser, dbUser);
             actionIfPasswordValid();
-            V_Helper_changeScene changeScene = new V_Helper_changeScene(continueToLandingPage, "view-landingPage");
+            V_changeScene changeScene = new V_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
     }
 
     @FXML
     protected void onBackToLoginEmail() {
-        V_Helper_changeScene changeScene = new V_Helper_changeScene(backToLoginEmail, "view-loginEmail");
+        updateUser(viewUser, dbUser);
+        V_changeScene changeScene = new V_changeScene(backToLoginEmail, "view-loginEmail");
     }
 
     @FXML
     public void updatePassword() {
-        C_Helper_tempData.setPassword(passwordField.getText());
+        viewUser.setPassword(passwordField.getText());
         if (isPasswordValid()) actionIfPasswordValid();
     }
 
     @FXML
     public void updatePasswordField() {
-        passwordField.setText(C_Helper_tempData.getPassword());
+        passwordField.setText(viewUser.getPassword());
     }
 
     @FXML
@@ -97,5 +106,10 @@ public class V_Controller_loginPassword implements Initializable {
         passwordField.setOnAction(event -> onContinueToLandingPage());
         continueToLandingPage.setDisable(false);
         infoLoginPassword.setVisible(false);
+    }
+
+    private void updateUser(User viewUser, User dbUser) {
+        C_SessionData.setViewUser(viewUser);
+        C_SessionData.setDbUser(dbUser);
     }
 }
