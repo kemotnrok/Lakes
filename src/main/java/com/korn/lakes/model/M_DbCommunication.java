@@ -3,7 +3,7 @@ package com.korn.lakes.model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class M_DTO {
+public class M_DbCommunication {
 
     static String path = "jdbc:sqlite:src/main/resources/com/korn/lakes/db/%s.db";
 

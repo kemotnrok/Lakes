@@ -7,6 +7,7 @@
 - [ ] Passwort vergessen
 - [ ] Tab-Reihenfolge
 - [ ] abmelden in der Applikation
+- [ ] wie kann ich das Enum "Databases" in eine Klasse verschieben und trotzdem ansprechen?
 
 ## Salt
 - [ ] SecureRandom, 16/32 Byte

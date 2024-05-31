@@ -17,12 +17,12 @@ public class M_DbService {
     public static void updateDB(String data, M_Databases db) {
         ArrayList<String> sqlStmts = new ArrayList<>();
         sqlStmts.add(String.format(insertUser, data, 102)); //todo drei Argumente
-        M_DTO.dtoUpdateDb(sqlStmts, db);
+        M_DbCommunication.dtoUpdateDb(sqlStmts, db);
         sqlStmts.clear();
     }
 
     public static ResultSet queryDB(String data, M_Databases db) {
         String sqlStmt = String.format(findUser, data);
-        return M_DTO.dtoQueryDb(sqlStmt, db);
+        return M_DbCommunication.dtoQueryDb(sqlStmt, db);
     }
 }
