@@ -1,7 +1,6 @@
 package com.korn.lakes.view;
 
-import com.korn.lakes.controller.C_Helper_diversMethods;
-import com.korn.lakes.controller.C_SessionData;
+import com.korn.lakes.exceptions.NoUserFoundException;
 import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +9,10 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.korn.lakes.controller.C_General.findDbUser;
+import static com.korn.lakes.controller.C_SessionData.*;
+import static com.korn.lakes.view.V_Helper_diversMethods.validateEmail;
 
 public class V_Controller_loginEmail implements Initializable {
 
@@ -27,8 +30,8 @@ public class V_Controller_loginEmail implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewUser = C_SessionData.getViewUser();
-        dbUser = C_SessionData.getDbUser();
+        viewUser = getViewUser();
+        dbUser = getDbUser();
         updateEmailField();
 
         emailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
@@ -47,12 +50,13 @@ public class V_Controller_loginEmail implements Initializable {
     }
 
     @FXML
-    private void onContinueToLoginPassword() {
+    private void onContinueToLoginPassword() throws NoUserFoundException {
         if (isEmailValid()) {
-            updateUser(viewUser, dbUser);
             actionIfEmailValid();
-            V_changeScene changeScene = new V_changeScene(continueToLoginPassword, "view-loginPassword");
-            C_SessionData.setViewUser(viewUser);
+            if (findDbUser(viewUser)) {
+                updateUser(viewUser, dbUser);
+                V_changeScene changeScene = new V_changeScene(continueToLoginPassword, "view-loginPassword");
+            }
         } else actionIfEmailNotvalid();
     }
 
@@ -69,14 +73,20 @@ public class V_Controller_loginEmail implements Initializable {
 
     @FXML
     private boolean isEmailValid() {
-        return V_Helper_diversMethods.validateEmail(emailField.getText());
+        return validateEmail(emailField.getText());
     }
 
     @FXML
     private void actionIfEmailValid() {
         emailField.getStyleClass().remove("warning");
         emailField.selectEnd();
-        emailField.setOnAction(event -> onContinueToLoginPassword());
+        emailField.setOnAction(event -> {
+            try {
+                onContinueToLoginPassword();
+            } catch (NoUserFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
         continueToLoginPassword.setDisable(false);
     }
 
@@ -92,13 +102,7 @@ public class V_Controller_loginEmail implements Initializable {
     }
 
     private void updateUser(User viewUser, User dbUser){
-        C_SessionData.setViewUser(viewUser);
-        C_SessionData.setDbUser(dbUser);
+        setViewUser(viewUser);
+        setDbUser(dbUser);
     }
-
-    @FXML
-    private boolean isEmailInDb(){
-        return C_Helper_diversMethods.checkEmailDb(emailField.getText());
-    }
-
 }

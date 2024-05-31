@@ -3,7 +3,9 @@ package com.korn.lakes.model.DTO;
 public class User {
 
     private String email = "";
+    private String emailHash = "";
     private String password = "";
+    private String passwordHash = "";
     private String salt = "";
 
 //    ----------
@@ -36,5 +38,21 @@ public class User {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public String getEmailHash() {
+        return emailHash;
+    }
+
+    public void setEmailHash(String emailHash) {
+        this.emailHash = emailHash;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
