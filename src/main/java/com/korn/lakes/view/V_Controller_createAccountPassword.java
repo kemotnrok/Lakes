@@ -98,6 +98,7 @@ public class V_Controller_createAccountPassword implements Initializable {
     private void actionIfPasswordNotvalid() {
         if (!createAccountPasswordField.getStyleClass().contains("warning")) {
             createAccountPasswordField.requestFocus();
+            createAccountPasswordField.selectEnd();
         }
         createAccountPasswordField.getStyleClass().add("warning");
         passwordPlainCreateAccount.getStyleClass().add("warning");
@@ -112,6 +113,10 @@ public class V_Controller_createAccountPassword implements Initializable {
     private void actionIfPasswordValid() {
         createAccountPasswordField.getStyleClass().remove("warning");
         passwordPlainCreateAccount.getStyleClass().remove("warning");
+        // erst beim zweiten Mal wird die Klasse sicher entfernt
+        createAccountPasswordField.getStyleClass().remove("warning");
+        passwordPlainCreateAccount.getStyleClass().remove("warning");
+
         createAccountPasswordField.setOnAction(event -> onContinueToConfirmAccount());
         continueToConfirmAccountFromPassword.setDisable(false);
         infoCreatePassword.setText("");
