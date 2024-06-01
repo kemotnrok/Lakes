@@ -90,6 +90,8 @@ public class V_Controller_loginEmail implements Initializable {
     @FXML
     private void actionIfEmailValid() {
         emailField.getStyleClass().remove("warning");
+        // beim zweiten Mal wird die Klasse sicher entfernt
+        emailField.getStyleClass().remove("warning");
         emailField.selectEnd();
         emailField.setOnAction(event -> {
             try {
@@ -106,7 +108,10 @@ public class V_Controller_loginEmail implements Initializable {
 
     @FXML
     private void actionIfEmailNotvalid() {
-        if (!emailField.getStyleClass().contains("warning")) emailField.requestFocus();
+        if (!emailField.getStyleClass().contains("warning")) {
+            emailField.requestFocus();
+            emailField.selectEnd();
+        };
         emailField.getStyleClass().add("warning");
         emailField.selectEnd();
         continueToLoginPassword.setDisable(true);

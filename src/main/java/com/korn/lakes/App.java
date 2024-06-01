@@ -16,7 +16,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-//        Stellt sicher, dass Buttons am Mac mit der Eingabetaste bestätigt werden
+//        Stellt sicher, dass Buttons auf einem Mac mit der Eingabetaste bestätigt werden
         stage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() != KeyCode.ENTER) return;
             if ((event.getTarget() instanceof Button)) ((Button) event.getTarget()).fire();

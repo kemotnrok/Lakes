@@ -11,8 +11,6 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.korn.lakes.controller.C_General.findDbUser;
-
 public class V_Controller_createAccountEmail implements Initializable {
 
     @FXML
@@ -21,6 +19,8 @@ public class V_Controller_createAccountEmail implements Initializable {
     private Button continueToCreateAccountPassword;
     @FXML
     private TextField createAccountEmailField;
+    @FXML
+    private Text infoCreateEmail;
 
     User sessionUser;
 
@@ -34,10 +34,10 @@ public class V_Controller_createAccountEmail implements Initializable {
         createAccountEmailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
             if (isEmailValid()) actionIfEmailValid();
-            else actionIfEmailNotvalid();
+            else actionIfEmailNotValid();
         });
 
-        createAccountEmailField.setOnKeyTyped(event-> updateEmail());
+        createAccountEmailField.setOnKeyTyped(event -> updateEmail());
     }
 
     private void updateUser(User sessionUser) {
@@ -53,7 +53,7 @@ public class V_Controller_createAccountEmail implements Initializable {
     @FXML
     protected void onContinueToCreateAccountPassword() {
         if (!isEmailValid()) {
-            actionIfEmailNotvalid();
+            actionIfEmailNotValid();
             return;
         }
         actionIfEmailValid();
@@ -65,6 +65,7 @@ public class V_Controller_createAccountEmail implements Initializable {
     public void updateEmail() {
         sessionUser.setEmail(createAccountEmailField.getText());
         if (isEmailValid()) actionIfEmailValid();
+        clearInfo();
     }
 
     @FXML
@@ -78,10 +79,22 @@ public class V_Controller_createAccountEmail implements Initializable {
     }
 
     @FXML
-    private void actionIfEmailNotvalid() {
+    private void actionIfEmailValid() {
+        createAccountEmailField.getStyleClass().remove("warning");
+        // beim zweiten Mal wird die Klasse sicher entfernt
+        createAccountEmailField.getStyleClass().remove("warning");
+        createAccountEmailField.setOnAction(event -> onContinueToCreateAccountPassword());
+        continueToCreateAccountPassword.setDisable(false);
+        clearInfo();
+    }
+
+    @FXML
+    private void actionIfEmailNotValid() {
         if (!createAccountEmailField.getStyleClass().contains("warning")) {
             createAccountEmailField.requestFocus();
+            createAccountEmailField.selectEnd();
         }
+        setInfo("Ungültige E-Mail-Adresse");
         createAccountEmailField.getStyleClass().add("warning");
         createAccountEmailField.selectEnd();
         continueToCreateAccountPassword.setDisable(true);
@@ -89,9 +102,14 @@ public class V_Controller_createAccountEmail implements Initializable {
     }
 
     @FXML
-    private void actionIfEmailValid() {
-        createAccountEmailField.getStyleClass().remove("warning");
-        createAccountEmailField.setOnAction(event -> onContinueToCreateAccountPassword());
-        continueToCreateAccountPassword.setDisable(false);
+    private void setInfo(String text) {
+        infoCreateEmail.setText(text);
+        infoCreateEmail.setVisible(true);
+    }
+
+    @FXML
+    private void clearInfo() {
+        infoCreateEmail.setText("");
+        infoCreateEmail.setVisible(false);
     }
 }

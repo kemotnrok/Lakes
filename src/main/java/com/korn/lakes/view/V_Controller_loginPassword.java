@@ -100,6 +100,7 @@ public class V_Controller_loginPassword implements Initializable {
     private void actionIfPasswordNotvalid() {
         if (!passwordField.getStyleClass().contains("warning")) {
             passwordField.requestFocus();
+            passwordField.selectEnd();
         }
         passwordField.getStyleClass().add("warning");
         passwordPlain.getStyleClass().add("warning");
@@ -112,7 +113,13 @@ public class V_Controller_loginPassword implements Initializable {
     @FXML
     private void actionIfPasswordValid() {
         passwordField.getStyleClass().remove("warning");
+        // beim zweiten Mal wird die Klasse sicher entfernt
+        passwordField.getStyleClass().remove("warning");
+
         passwordPlain.getStyleClass().remove("warning");
+        // beim zweiten Mal wird die Klasse sicher entfernt
+        passwordPlain.getStyleClass().remove("warning");
+
         passwordField.setOnAction(event -> onContinueToLandingPage());
         if (!passwordNotMatch) {
             continueToLandingPage.setDisable(false);
