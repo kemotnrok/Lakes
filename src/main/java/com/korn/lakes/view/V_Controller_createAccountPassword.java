@@ -59,14 +59,14 @@ public class V_Controller_createAccountPassword implements Initializable {
         if (isPasswordValid()) {
             updateUser(viewUser);
             actionIfPasswordValid();
-            V_changeScene changeScene = new V_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
+            new V_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
         } else actionIfPasswordNotvalid();
     }
 
     @FXML
     protected void onBackToCreateAccountEmail() {
         updateUser(viewUser);
-        V_changeScene changeScene = new V_changeScene(backToAccountEmailFromPassword, "view-createAccountEmail");
+        new V_changeScene(backToAccountEmailFromPassword, "view-createAccountEmail");
     }
 
     @FXML
@@ -110,10 +110,5 @@ public class V_Controller_createAccountPassword implements Initializable {
         createAccountPasswordField.setOnAction(event -> onContinueToConfirmAccount());
         continueToConfirmAccountFromPassword.setDisable(false);
         infoCreateAccountPassword.setVisible(false);
-    }
-
-    @FXML
-    private void writeEmail(){
-//    todo?
     }
 }

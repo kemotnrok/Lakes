@@ -30,7 +30,7 @@ public class V_Controller_createAccountEmail implements Initializable {
         viewUser = C_SessionData.getViewUser();
         dbUser = C_SessionData.getDbUser();
 
-        updateCreateAccountEmailField(viewUser.getEmail());
+        updateCreateAccountEmailField();
 
         createAccountEmailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -48,7 +48,7 @@ public class V_Controller_createAccountEmail implements Initializable {
     @FXML
     protected void onBackToLoginEmailFromCreateAccount() {
         updateUser(viewUser);
-        V_changeScene changeScene = new V_changeScene(backToLoginEmailFromCreateAccount, "view-loginEmail");
+        new V_changeScene(backToLoginEmailFromCreateAccount, "view-loginEmail");
     }
 
     @FXML
@@ -56,7 +56,7 @@ public class V_Controller_createAccountEmail implements Initializable {
         if (isEmailValid()) {
             updateUser(viewUser);
             actionIfEmailNotvalid();
-            V_changeScene changeScene = new V_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
+            new V_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
         } else actionIfEmailNotvalid();
     }
 
@@ -67,7 +67,7 @@ public class V_Controller_createAccountEmail implements Initializable {
     }
 
     @FXML
-    public void updateCreateAccountEmailField(String text) {
+    public void updateCreateAccountEmailField() {
         createAccountEmailField.setText(viewUser.getEmail());
     }
 

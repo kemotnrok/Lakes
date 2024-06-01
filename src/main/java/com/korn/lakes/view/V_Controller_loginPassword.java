@@ -27,19 +27,16 @@ public class V_Controller_loginPassword implements Initializable {
     private TextField passwordPlain;
     @FXML
     private Text infoLoginPassword;
-    @FXML
-    private Button forgotPassword;
+//    @FXML
+//    private Button forgotPassword; //todo
 
     User viewUser;
-    User dbUser;
-
 
 //    --------------------
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewUser = C_SessionData.getViewUser();
-        dbUser = C_SessionData.getDbUser();
         updatePasswordField();
         passwordField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -52,16 +49,16 @@ public class V_Controller_loginPassword implements Initializable {
     @FXML
     protected void onContinueToLandingPage() {
         if (isPasswordValid()) {
-            updateUser(viewUser, dbUser);
+            updateUser(viewUser);
             actionIfPasswordValid();
-            V_changeScene changeScene = new V_changeScene(continueToLandingPage, "view-landingPage");
+            new V_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
     }
 
     @FXML
     protected void onBackToLoginEmail() {
-        updateUser(viewUser, dbUser);
-        V_changeScene changeScene = new V_changeScene(backToLoginEmail, "view-loginEmail");
+        updateUser(viewUser);
+        new V_changeScene(backToLoginEmail, "view-loginEmail");
     }
 
     @FXML
@@ -108,8 +105,7 @@ public class V_Controller_loginPassword implements Initializable {
         infoLoginPassword.setVisible(false);
     }
 
-    private void updateUser(User viewUser, User dbUser) {
+    private void updateUser(User viewUser) {
         C_SessionData.setViewUser(viewUser);
-        C_SessionData.setDbUser(dbUser);
     }
 }

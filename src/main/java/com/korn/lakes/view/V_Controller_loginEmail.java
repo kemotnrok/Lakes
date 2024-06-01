@@ -26,12 +26,10 @@ public class V_Controller_loginEmail implements Initializable {
 //    --------------------
 
     User viewUser;
-    User dbUser;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewUser = getViewUser();
-        dbUser = getDbUser();
         updateEmailField();
 
         emailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
@@ -45,17 +43,17 @@ public class V_Controller_loginEmail implements Initializable {
 
     @FXML
     private void onCreateAccount() {
-        updateUser(viewUser, dbUser);
-        V_changeScene changeScene = new V_changeScene(createAccount, "view-createAccountEmail");
+        updateUser(viewUser);
+        new V_changeScene(createAccount, "view-createAccountEmail");
     }
 
     @FXML
     private void onContinueToLoginPassword() throws NoUserFoundException {
         if (isEmailValid()) {
             actionIfEmailValid();
+            updateUser(viewUser);
             if (findDbUser(viewUser)) {
-                updateUser(viewUser, dbUser);
-                V_changeScene changeScene = new V_changeScene(continueToLoginPassword, "view-loginPassword");
+                new V_changeScene(continueToLoginPassword, "view-loginPassword");
             }
         } else actionIfEmailNotvalid();
     }
@@ -101,8 +99,7 @@ public class V_Controller_loginEmail implements Initializable {
         emailField.setOnAction(null);
     }
 
-    private void updateUser(User viewUser, User dbUser){
+    private void updateUser(User viewUser) {
         setViewUser(viewUser);
-        setDbUser(dbUser);
     }
 }
