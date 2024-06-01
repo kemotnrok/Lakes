@@ -13,6 +13,12 @@ public class M_Crypto {
     private static final int ITERATIONS = 65536;
     private static final int KEY_LENGTH = 256;
     private static final byte[] EMAIL_SALT = "fixedSaltForEmail".getBytes();
+//
+//    public static void main(String[] args) {
+//        System.out.println(Arrays.toString(hashPasswordNewSalt("Aa00Aa00Aa")));
+//        System.out.println(Arrays.toString(hashPasswordNewSalt("Bb00Bb00Bb")));
+//
+//    }
 
     public static String hashEmail(String email) {
         try {
@@ -41,7 +47,8 @@ public class M_Crypto {
 
     public static String hashPasswordGivenSalt(String password, String salt) {
         try {
-            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), Base64.getDecoder().decode(salt), ITERATIONS, KEY_LENGTH);
+            byte[] saltBytes = Base64.getDecoder().decode(salt);
+            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), saltBytes, ITERATIONS, KEY_LENGTH);
             SecretKeyFactory factory = SecretKeyFactory.getInstance(ALGORITHM);
             byte[] hash = factory.generateSecret(spec).getEncoded();
             return Base64.getEncoder().encodeToString(hash);

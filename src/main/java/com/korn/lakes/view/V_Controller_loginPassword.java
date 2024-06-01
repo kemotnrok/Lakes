@@ -13,6 +13,10 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.korn.lakes.controller.C_General.checkPassword;
+import static com.korn.lakes.controller.C_SessionData.getDbUser;
+import static com.korn.lakes.controller.C_SessionData.getSessionUser;
+
 public class V_Controller_loginPassword implements Initializable {
 
     @FXML
@@ -27,16 +31,17 @@ public class V_Controller_loginPassword implements Initializable {
     private TextField passwordPlain;
     @FXML
     private Text infoLoginPassword;
-//    @FXML
-//    private Button forgotPassword; //todo
+    @FXML
+    private Button forgotPassword; //todo
 
-    User viewUser;
+    User sessionUser;
+    private boolean passwordNotMatch;
 
 //    --------------------
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewUser = C_SessionData.getViewUser();
+        sessionUser = C_SessionData.getSessionUser();
         updatePasswordField();
         passwordField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -49,27 +54,35 @@ public class V_Controller_loginPassword implements Initializable {
     @FXML
     protected void onContinueToLandingPage() {
         if (isPasswordValid()) {
-            updateUser(viewUser);
+            updateUser(sessionUser);
             actionIfPasswordValid();
+            if (!checkPassword(sessionUser)) {
+                actionIfNoMatchPassword();
+                return;
+            }
             new V_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
+        System.out.println(getSessionUser().toString()); // todo löschen
+        System.out.println(getDbUser().toString()); // todo löschen
     }
 
     @FXML
     protected void onBackToLoginEmail() {
-        updateUser(viewUser);
+        updateUser(sessionUser);
         new V_changeScene(backToLoginEmail, "view-loginEmail");
     }
 
     @FXML
     public void updatePassword() {
-        viewUser.setPassword(passwordField.getText());
+        sessionUser.setPassword(passwordField.getText());
+        passwordNotMatch = false;
         if (isPasswordValid()) actionIfPasswordValid();
     }
 
     @FXML
     public void updatePasswordField() {
-        passwordField.setText(viewUser.getPassword());
+        passwordNotMatch = false;
+        passwordField.setText(sessionUser.getPassword());
     }
 
     @FXML
@@ -93,7 +106,7 @@ public class V_Controller_loginPassword implements Initializable {
         passwordField.selectEnd();
         continueToLandingPage.setDisable(true);
         passwordField.setOnAction(null);
-        infoLoginPassword.setVisible(true);
+        setInfo("Mindestens 8 Zeichen und mind. zwei der Elemente: Klein-, Großbuchstaben, Zahlen und Sonderzeichen.");
     }
 
     @FXML
@@ -101,11 +114,34 @@ public class V_Controller_loginPassword implements Initializable {
         passwordField.getStyleClass().remove("warning");
         passwordPlain.getStyleClass().remove("warning");
         passwordField.setOnAction(event -> onContinueToLandingPage());
-        continueToLandingPage.setDisable(false);
+        if (!passwordNotMatch) {
+            continueToLandingPage.setDisable(false);
+            clearInfo();
+        }
+    }
+
+    @FXML
+    public void actionIfNoMatchPassword() {
+        passwordNotMatch = true;
+        setInfo("Kein passendes Passwort");
+        continueToLandingPage.setDisable(true);
+        passwordField.setOnAction(null);
+        forgotPassword.requestFocus();
+    }
+
+    @FXML
+    private void setInfo(String text) {
+        infoLoginPassword.setText(text);
+        infoLoginPassword.setVisible(true);
+    }
+
+    @FXML
+    private void clearInfo() {
+        infoLoginPassword.setText("");
         infoLoginPassword.setVisible(false);
     }
 
-    private void updateUser(User viewUser) {
-        C_SessionData.setViewUser(viewUser);
+    private void updateUser(User sessionUser) {
+        C_SessionData.setSessionUser(sessionUser);
     }
 }

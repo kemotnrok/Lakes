@@ -2,10 +2,16 @@
 
 - [x] E-Mail verifizieren
 - [x] Passwort verifizieren
-- [ ] .warnung beim ersten Mal deaktivieren
-- [ ] confirm mit E-Mail
+- [x] Aktion wenn kein User vorhanden
+- [x] Passwort hashen, Hash und salt in sessionUser eintragen
+- [x] Passwort vergleichen
+- [x] Create User
 - [ ] Passwort vergessen
-- [ ] Tab-Reihenfolge
+- [ ] delete user
+
+- [ ] Klasse ".warnung" beim ersten Mal deaktivieren
+- [ ] confirm mit E-Mail
+- [x] Tab-Reihenfolge
 - [ ] abmelden in der Applikation
 - [ ] wie kann ich das Enum "Databases" in eine Klasse verschieben und trotzdem ansprechen?
 

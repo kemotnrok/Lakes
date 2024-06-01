@@ -1,5 +1,7 @@
 package com.korn.lakes.model.DTO;
 
+import java.util.Comparator;
+
 public class User {
 
     private String email = "";
@@ -13,6 +15,26 @@ public class User {
     public User(String email) {
         this.email = email;
     }
+
+//    ----------
+
+    @Override
+    public String toString(){
+        return String.format("""
+                User:
+                email: %s
+                emailHash: %s
+                password: %s
+                passwordHash: %s
+                salt: %s
+                """, email, emailHash, password, passwordHash, salt);
+    }
+
+    public boolean equals(User user){
+        return this.emailHash.equals(user.emailHash) && this.passwordHash.equals(user.passwordHash);
+    }
+
+
 
 //    ----------
 
@@ -55,4 +77,5 @@ public class User {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
 }

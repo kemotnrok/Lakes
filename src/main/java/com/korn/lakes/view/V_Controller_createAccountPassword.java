@@ -1,5 +1,6 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_General;
 import com.korn.lakes.controller.C_SessionData;
 import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.korn.lakes.controller.C_General.createUser;
 
 public class V_Controller_createAccountPassword implements Initializable {
 
@@ -26,19 +29,15 @@ public class V_Controller_createAccountPassword implements Initializable {
     @FXML
     private TextField passwordPlainCreateAccount;
     @FXML
-    private Text infoCreateAccountPassword;
+    private Text infoCreatePassword;
 
-    User viewUser;
-    User dbUser;
-
-
+    User sessionUser;
 
 //    --------------------
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewUser = C_SessionData.getViewUser();
-        dbUser = C_SessionData.getDbUser();
+        sessionUser = C_SessionData.getSessionUser();
         updateCreateAccountPasswordField();
         createAccountPasswordField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -50,34 +49,39 @@ public class V_Controller_createAccountPassword implements Initializable {
 
     //    ----------
 
-    private void updateUser(User viewUser) {
-        C_SessionData.setViewUser(viewUser);
+    private void updateUser(User sessionUser) {
+        C_SessionData.setSessionUser(sessionUser);
     }
 
     @FXML
     protected void onContinueToConfirmAccount(){
-        if (isPasswordValid()) {
-            updateUser(viewUser);
-            actionIfPasswordValid();
-            new V_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
-        } else actionIfPasswordNotvalid();
+        if (!isPasswordValid()) {
+            actionIfPasswordNotvalid();
+            return;
+        }
+        actionIfPasswordValid();
+        updateUser(sessionUser);
+        if (!createUser(sessionUser)) return;
+        new V_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
+        System.out.println(C_SessionData.getSessionUser());
+        System.out.println(C_SessionData.getDbUser());
     }
 
     @FXML
     protected void onBackToCreateAccountEmail() {
-        updateUser(viewUser);
+        updateUser(sessionUser);
         new V_changeScene(backToAccountEmailFromPassword, "view-createAccountEmail");
     }
 
     @FXML
     public void updatePassword() {
-        viewUser.setPassword(createAccountPasswordField.getText());
+        sessionUser.setPassword(createAccountPasswordField.getText());
         if (isPasswordValid()) actionIfPasswordValid();
     }
 
     @FXML
     public void updateCreateAccountPasswordField() {
-        createAccountPasswordField.setText(viewUser.getPassword());
+        createAccountPasswordField.setText(sessionUser.getPassword());
     }
 
     @FXML
@@ -100,7 +104,8 @@ public class V_Controller_createAccountPassword implements Initializable {
         createAccountPasswordField.selectEnd();
         continueToConfirmAccountFromPassword.setDisable(true);
         createAccountPasswordField.setOnAction(null);
-        infoCreateAccountPassword.setVisible(true);
+        infoCreatePassword.setText("Mindestens 8 Zeichen und mind. zwei der Elemente: Klein-, Großbuchstaben, Zahlen und Sonderzeichen.");
+        infoCreatePassword.setVisible(true);
     }
 
     @FXML
@@ -109,6 +114,7 @@ public class V_Controller_createAccountPassword implements Initializable {
         passwordPlainCreateAccount.getStyleClass().remove("warning");
         createAccountPasswordField.setOnAction(event -> onContinueToConfirmAccount());
         continueToConfirmAccountFromPassword.setDisable(false);
-        infoCreateAccountPassword.setVisible(false);
+        infoCreatePassword.setText("");
+        infoCreatePassword.setVisible(false);
     }
 }

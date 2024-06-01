@@ -4,17 +4,17 @@ import com.korn.lakes.model.DTO.User;
 
 public class C_SessionData {
 
-    private static User viewUser = new User("");
+    private static User sessionUser = new User("");
     private static User dbUser = new User("");
 
 //    ----------
 
-    public static User getViewUser() {
-        return viewUser;
+    public static User getSessionUser() {
+        return sessionUser;
     }
 
-    public static void setViewUser(User viewUser) {
-        C_SessionData.viewUser = viewUser;
+    public static void setSessionUser(User sessionUser) {
+        C_SessionData.sessionUser = sessionUser;
     }
 
     public static User getDbUser() {

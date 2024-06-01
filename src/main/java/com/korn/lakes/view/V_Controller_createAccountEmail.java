@@ -6,9 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.korn.lakes.controller.C_General.findDbUser;
 
 public class V_Controller_createAccountEmail implements Initializable {
 
@@ -19,17 +22,13 @@ public class V_Controller_createAccountEmail implements Initializable {
     @FXML
     private TextField createAccountEmailField;
 
-    User viewUser;
-    User dbUser;
-
+    User sessionUser;
 
 //    --------------------
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        viewUser = C_SessionData.getViewUser();
-        dbUser = C_SessionData.getDbUser();
-
+        sessionUser = C_SessionData.getSessionUser();
         updateCreateAccountEmailField();
 
         createAccountEmailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
@@ -41,34 +40,36 @@ public class V_Controller_createAccountEmail implements Initializable {
         createAccountEmailField.setOnKeyTyped(event-> updateEmail());
     }
 
-    private void updateUser(User viewUser){
-        C_SessionData.setViewUser(viewUser);
+    private void updateUser(User sessionUser) {
+        C_SessionData.setSessionUser(sessionUser);
     }
 
     @FXML
     protected void onBackToLoginEmailFromCreateAccount() {
-        updateUser(viewUser);
+        updateUser(sessionUser);
         new V_changeScene(backToLoginEmailFromCreateAccount, "view-loginEmail");
     }
 
     @FXML
     protected void onContinueToCreateAccountPassword() {
-        if (isEmailValid()) {
-            updateUser(viewUser);
+        if (!isEmailValid()) {
             actionIfEmailNotvalid();
-            new V_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
-        } else actionIfEmailNotvalid();
+            return;
+        }
+        actionIfEmailValid();
+        updateUser(sessionUser);
+        new V_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
     }
 
     @FXML
     public void updateEmail() {
-        viewUser.setEmail(createAccountEmailField.getText());
+        sessionUser.setEmail(createAccountEmailField.getText());
         if (isEmailValid()) actionIfEmailValid();
     }
 
     @FXML
     public void updateCreateAccountEmailField() {
-        createAccountEmailField.setText(viewUser.getEmail());
+        createAccountEmailField.setText(sessionUser.getEmail());
     }
 
     @FXML

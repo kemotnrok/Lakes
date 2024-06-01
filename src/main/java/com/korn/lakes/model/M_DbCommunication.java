@@ -4,8 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.korn.lakes.model.M_DbService.mapResultSet;
-
 public class M_DbCommunication {
 
     static String path = "jdbc:sqlite:src/main/resources/com/korn/lakes/db/%s.db";
@@ -31,6 +29,21 @@ public class M_DbCommunication {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    private static ArrayList<HashMap<String, String>> mapResultSet(ResultSet rs) throws SQLException {
+        ArrayList<HashMap<String, String>> resultList = new ArrayList<>();
+        while (rs.next()) {
+            HashMap<String, String> row = new HashMap<>();
+            int columnCount = rs.getMetaData().getColumnCount();
+            for (int i = 1; i <= columnCount; i++) {
+                String key = rs.getMetaData().getColumnName(i);
+                String value = rs.getString(i);
+                row.put(key, value);
+            }
+            resultList.add(row);
+        }
+        return resultList;
     }
 }
 
