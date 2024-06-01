@@ -58,10 +58,10 @@ public class V_Controller_loginNewPassword implements Initializable {
                 actionIfNotChangedPassword();
                 return;
             }
+            // Ein E-Mail senden etc.todo
+            // das Passwort wurde geändert todo
             new V_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
-//        System.out.println(getSessionUser().toString()); // todo löschen
-//        System.out.println(getDbUser().toString()); // todo löschen
     }
 
     @FXML
