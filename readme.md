@@ -8,6 +8,7 @@
 - [x] Create User
 - [ ] Passwort vergessen / Email
 - [ ] Passwort-vergessen-Button mit Eingabetaste auf Mac nicht bedienbar
+- [ ] E-Mail darf sich nicht wiederholen
 - [ ] delete user
 
 - [ ] Klasse ".warnung" beim ersten Mal deaktivieren
