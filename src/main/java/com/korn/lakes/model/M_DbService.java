@@ -14,8 +14,7 @@ public class M_DbService {
     private static final String findUser = "select e_mail_hash, salt, password_hash from users where e_mail_hash like '%s'";
     private static final String findPassword = "select password_hash from users where e_mail_hash like '%s'";
     private static final String updateUser = "INSERT INTO users (e_mail_hash, salt) VALUES('%s', '%s');";
-    private static final String updateUserEmail = "UPDATE users SET e_mail_hash = '%s' where e_mail_hash like '%s';";
-    private static final String updateUserPassword = "UPDATE users SET password_hash ='%s' where password_hash like '%s'";
+    private static final String updateUserPassword = "UPDATE users SET password_hash = '%s', salt ='%s' where e_mail_hash like '%s'";
     private static final String insertUserPassword = "UPDATE users SET password_hash ='%s' where e_mail_hash like '%s'";
 
     private static final String deleteUser = "Delete * from users where e_mail_hash like '%s'"; // todo
@@ -38,17 +37,10 @@ public class M_DbService {
         sqlStmts.clear();
     }
 
-    public static void updateUserEmail(String emailOld, String emailNew, M_Databases db) {
+    public static void updateUserPassword(String passwordNew, String salt, String emailHash) {
         ArrayList<String> sqlStmts = new ArrayList<>();
-        sqlStmts.add(String.format(updateUserEmail, emailNew, emailOld));
-        M_DbCommunication.updateDb(sqlStmts, db);
-        sqlStmts.clear();
-    }
-
-    public static void updateUserPassword(String passwordOld, String passwordNew, M_Databases db) {
-        ArrayList<String> sqlStmts = new ArrayList<>();
-        sqlStmts.add(String.format(updateUserPassword, passwordNew, passwordOld));
-        M_DbCommunication.updateDb(sqlStmts, db);
+        sqlStmts.add(String.format(updateUserPassword, passwordNew, salt, emailHash));
+        M_DbCommunication.updateDb(sqlStmts, M_Databases.users_db);
         sqlStmts.clear();
     }
 

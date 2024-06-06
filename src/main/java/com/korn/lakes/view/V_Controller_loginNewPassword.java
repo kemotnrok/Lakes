@@ -13,11 +13,11 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.korn.lakes.controller.C_General.checkPassword;
+import static com.korn.lakes.controller.C_General.changePassword;
 import static com.korn.lakes.controller.C_SessionData.getDbUser;
 import static com.korn.lakes.controller.C_SessionData.getSessionUser;
 
-public class V_Controller_loginPassword implements Initializable {
+public class V_Controller_loginNewPassword implements Initializable {
 
     @FXML
     private Button backToLoginEmail;
@@ -31,8 +31,6 @@ public class V_Controller_loginPassword implements Initializable {
     private TextField passwordPlain;
     @FXML
     private Text infoLoginPassword;
-    @FXML
-    private Button forgotPassword; //todo
 
     User sessionUser;
     private boolean passwordNotMatch;
@@ -56,14 +54,14 @@ public class V_Controller_loginPassword implements Initializable {
         if (isPasswordValid()) {
             updateUser(sessionUser);
             actionIfPasswordValid();
-            if (!checkPassword(sessionUser)) {
-                actionIfNoMatchPassword();
+            if (!changePassword(sessionUser)) {
+                actionIfNotChangedPassword();
                 return;
             }
+            // Ein E-Mail senden etc.todo
+            // das Passwort wurde geändert todo
             new V_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
-        System.out.println(getSessionUser().toString()); // todo löschen
-        System.out.println(getDbUser().toString()); // todo löschen
     }
 
     @FXML
@@ -100,7 +98,6 @@ public class V_Controller_loginPassword implements Initializable {
     private void actionIfPasswordNotvalid() {
         if (!passwordField.getStyleClass().contains("warning")) {
             passwordField.requestFocus();
-            passwordField.selectEnd();
         }
         passwordField.getStyleClass().add("warning");
         passwordPlain.getStyleClass().add("warning");
@@ -113,13 +110,7 @@ public class V_Controller_loginPassword implements Initializable {
     @FXML
     private void actionIfPasswordValid() {
         passwordField.getStyleClass().remove("warning");
-        // beim zweiten Mal wird die Klasse sicher entfernt
-        passwordField.getStyleClass().remove("warning");
-
         passwordPlain.getStyleClass().remove("warning");
-        // beim zweiten Mal wird die Klasse sicher entfernt
-        passwordPlain.getStyleClass().remove("warning");
-
         passwordField.setOnAction(event -> onContinueToLandingPage());
         if (!passwordNotMatch) {
             continueToLandingPage.setDisable(false);
@@ -128,12 +119,14 @@ public class V_Controller_loginPassword implements Initializable {
     }
 
     @FXML
-    public void actionIfNoMatchPassword() {
+    public void actionIfNotChangedPassword() {
         passwordNotMatch = true;
-        setInfo("Kein passendes Passwort");
+        setInfo("""
+                Etwas ist schiefgegangen.
+                Bitte versuchen Sie es noch einmal.
+                """);
         continueToLandingPage.setDisable(true);
         passwordField.setOnAction(null);
-        forgotPassword.requestFocus();
     }
 
     @FXML
@@ -148,16 +141,7 @@ public class V_Controller_loginPassword implements Initializable {
         infoLoginPassword.setVisible(false);
     }
 
-    @FXML
-    private void onForgotPassword(){
-        sessionUser.setPassword("");
-        updateUser(sessionUser);
-        new V_changeScene(backToLoginEmail, "view-loginNewPassword");
-    }
-
     private void updateUser(User sessionUser) {
         C_SessionData.setSessionUser(sessionUser);
     }
-
-
 }

@@ -12,14 +12,28 @@ import java.util.Objects;
 import static com.korn.lakes.controller.C_SessionData.getDbUser;
 import static com.korn.lakes.controller.C_SessionData.getSessionUser;
 import static com.korn.lakes.model.M_DbService.findUser;
+import static com.korn.lakes.model.M_DbService.updateUserPassword;
 
 public class C_General {
+
+    public static boolean createUser(User sessionUser) {
+        String sessionEmailHash = M_Crypto.hashEmail(sessionUser.getEmail());
+        String sessionPassword = sessionUser.getPassword();
+        String[] sessionPassHashAndSalt = Objects.requireNonNull(M_Crypto.hashPasswordNewSalt(sessionPassword));
+        String sessionPasswordHash = sessionPassHashAndSalt[0];
+        String salt = sessionPassHashAndSalt[1];
+        getSessionUser().setEmailHash(sessionEmailHash);
+        getSessionUser().setPasswordHash(sessionPasswordHash);
+        getSessionUser().setSalt(salt);
+        M_DbService.createUser(sessionEmailHash, salt);
+        M_DbService.insertUserPassword(sessionPasswordHash, sessionEmailHash);
+        return loginUser(sessionUser);
+    }
 
     public static boolean findDbUser(User sessionUser) {
         String sessionEmailHash = M_Crypto.hashEmail(sessionUser.getEmail());
         ArrayList<HashMap<String, String>> result = findUser(sessionEmailHash, M_Databases.users_db);
         getSessionUser().setEmailHash(sessionEmailHash);
-
         if (result.isEmpty()) return false;
         else {
             HashMap<String, String> row = result.getFirst();
@@ -46,17 +60,16 @@ public class C_General {
         }
     }
 
-    public static boolean createUser(User sessionUser) {
-        String sessionEmailHash = M_Crypto.hashEmail(sessionUser.getEmail());
+    public static boolean changePassword(User sessionUser){
+//        E-Mail-Senden simulieren
+        String sessionEmailHash = sessionUser.getEmailHash();
         String sessionPassword = sessionUser.getPassword();
         String[] sessionPassHashAndSalt = Objects.requireNonNull(M_Crypto.hashPasswordNewSalt(sessionPassword));
         String sessionPasswordHash = sessionPassHashAndSalt[0];
         String salt = sessionPassHashAndSalt[1];
-        getSessionUser().setEmailHash(sessionEmailHash);
         getSessionUser().setPasswordHash(sessionPasswordHash);
         getSessionUser().setSalt(salt);
-        M_DbService.createUser(sessionEmailHash, salt);
-        M_DbService.insertUserPassword(sessionPasswordHash, sessionEmailHash);
+        updateUserPassword(sessionPasswordHash, salt, sessionEmailHash);
         return loginUser(sessionUser);
     }
 
