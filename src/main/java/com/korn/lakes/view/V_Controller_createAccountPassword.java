@@ -63,8 +63,6 @@ public class V_Controller_createAccountPassword implements Initializable {
         updateUser(sessionUser);
         if (!createUser(sessionUser)) return;
         new V_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
-        System.out.println(C_SessionData.getSessionUser());
-        System.out.println(C_SessionData.getDbUser());
     }
 
     @FXML

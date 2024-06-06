@@ -1,5 +1,8 @@
 package com.korn.lakes.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +10,7 @@ import java.util.HashMap;
 public class M_DbCommunication {
 
     static String path = "jdbc:sqlite:src/main/resources/com/korn/lakes/db/%s.db";
+    private static final Logger logger = LoggerFactory.getLogger(M_DbCommunication.class);
 
     protected static void updateDb(ArrayList<String> sqlStatements, M_Databases db) {
         String url = String.format(path, db);

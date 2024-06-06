@@ -1,5 +1,6 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_General;
 import com.korn.lakes.exceptions.NoUserFoundException;
 import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;
@@ -37,6 +38,8 @@ public class V_Controller_loginEmail implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionUser = getSessionUser();
         updateEmailField();
+        updateEmail();
+        if(C_General.develop) emailField.setText("aa@aa.aa");
 
         emailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;

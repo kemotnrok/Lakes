@@ -1,5 +1,6 @@
 package com.korn.lakes;
 
+import com.korn.lakes.controller.C_General;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,13 +9,20 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class App extends Application {
+//    Logger
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
     @Override
     public void start(Stage stage) throws IOException {
+//        Logger
+        if(C_General.develop) logger.info("Logger ist gestartet");
 
 //        Stellt sicher, dass Buttons auf einem Mac mit der Eingabetaste bestätigt werden
         stage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {

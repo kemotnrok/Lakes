@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.korn.lakes.view.V_Controller_landingPage">
-   <Text layoutX="229.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Willkommen in der Applikation"/>
+<Pane prefHeight="600" prefWidth="830.0" style="-fx-background-color: #8CCBF9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.korn.lakes.view.V_Controller_landingPage">
+    <TableView layoutX="70.0" layoutY="99.0" style="-fx-background-color: white;">
+        <columns>
+            <TableColumn prefWidth="300" text="See" />
+            <TableColumn minWidth="0.0" prefWidth="150" text="Staat" />
+            <TableColumn prefWidth="150" text="Notiz" />
+            <TableColumn prefWidth="90" text="Bewertung" />
+        </columns>
+    </TableView>
 </Pane>

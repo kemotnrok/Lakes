@@ -1,9 +1,12 @@
 package com.korn.lakes.controller;
 
+import com.korn.lakes.App;
 import com.korn.lakes.model.DTO.User;
 import com.korn.lakes.model.M_Crypto;
 import com.korn.lakes.model.M_Databases;
 import com.korn.lakes.model.M_DbService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +19,11 @@ import static com.korn.lakes.model.M_DbService.updateUserPassword;
 
 public class C_General {
 
+    public static boolean develop = true;
+
+    //    Logger
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
     public static boolean createUser(User sessionUser) {
         String sessionEmailHash = M_Crypto.hashEmail(sessionUser.getEmail());
         String sessionPassword = sessionUser.getPassword();
@@ -27,6 +35,7 @@ public class C_General {
         getSessionUser().setSalt(salt);
         M_DbService.createUser(sessionEmailHash, salt);
         M_DbService.insertUserPassword(sessionPasswordHash, sessionEmailHash);
+        if(C_General.develop) logger.info(sessionUser.toString());
         return loginUser(sessionUser);
     }
 
@@ -34,13 +43,17 @@ public class C_General {
         String sessionEmailHash = M_Crypto.hashEmail(sessionUser.getEmail());
         ArrayList<HashMap<String, String>> result = findUser(sessionEmailHash, M_Databases.users_db);
         getSessionUser().setEmailHash(sessionEmailHash);
-        if (result.isEmpty()) return false;
+        if (result.isEmpty()) {
+            if(C_General.develop) logger.info("Kein User gefunden");
+            return false;
+        }
         else {
             HashMap<String, String> row = result.getFirst();
             User dbUser = getDbUser();
             dbUser.setEmailHash(row.get("e_mail_hash"));
             dbUser.setSalt(row.get("salt"));
             dbUser.setPasswordHash(row.get("password_hash"));
+            if(C_General.develop) logger.info(getDbUser().toString());
             return true;
         }
     }
@@ -51,11 +64,15 @@ public class C_General {
         String salt = getDbUser().getSalt();
         String sessionPasswordHash = Objects.requireNonNull(M_Crypto.hashPasswordGivenSalt(sessionPassword, salt));
         ArrayList<HashMap<String, String>> result = M_DbService.findPassword(sessionEmailHash, M_Databases.users_db);
-        if (result.isEmpty()) return false;
+        if (result.isEmpty()) {
+            if(C_General.develop) logger.info("Falsches Passwort");
+            return false;
+        }
         else {
             HashMap<String, String> row = result.getFirst();
             String dbPasswordHash = row.get("password_hash");
             getDbUser().setPasswordHash(dbPasswordHash);
+            if(C_General.develop) logger.info("Eingegeben:" + sessionPasswordHash + "\nDatenbank: " + dbPasswordHash);
             return Objects.equals(dbPasswordHash, sessionPasswordHash);
         }
     }
@@ -75,9 +92,8 @@ public class C_General {
 
     public static boolean loginUser(User sessionUser){
         if(!findDbUser(sessionUser)) return false;
-        System.out.println("aus C_General:");
-        System.out.println(C_SessionData.getSessionUser());
-        System.out.println(C_SessionData.getDbUser());
+        if(C_General.develop) logger.info("""
+                SessionUser:{}DbUser:{}""", sessionUser, C_SessionData.getDbUser());
         return sessionUser.equals(getDbUser());
     }
 }

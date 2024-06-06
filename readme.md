@@ -7,6 +7,7 @@
 - [x] Passwort vergleichen
 - [x] Create User
 - [ ] Passwort vergessen / Email
+- [ ] Anzahl Versuche
 - [ ] Passwort-vergessen-Button mit Eingabetaste auf Mac nicht bedienbar
 - [ ] E-Mail darf sich nicht wiederholen
 - [ ] delete user
@@ -16,6 +17,12 @@
 - [x] Tab-Reihenfolge
 - [ ] abmelden in der Applikation
 - [ ] wie kann ich das Enum "Databases" in eine Klasse verschieben und trotzdem ansprechen?
+
+## Farbe
+- dunkel: #194462
+- mittel: #3fa9f5
+- hell: #8CCBF9
+- heller: #bfe2fc
 
 ## Salt
 - [ ] SecureRandom, 16/32 Byte

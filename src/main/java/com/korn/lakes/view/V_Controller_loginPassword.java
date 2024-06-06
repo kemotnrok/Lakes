@@ -1,5 +1,6 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_General;
 import com.korn.lakes.controller.C_SessionData;
 import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;
@@ -42,6 +43,7 @@ public class V_Controller_loginPassword implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sessionUser = C_SessionData.getSessionUser();
+        if(C_General.develop) passwordField.setText("Aa00Aa00Aa");
         updatePasswordField();
         passwordField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -62,8 +64,6 @@ public class V_Controller_loginPassword implements Initializable {
             }
             new V_changeScene(continueToLandingPage, "view-landingPage");
         } else actionIfPasswordNotvalid();
-        System.out.println(getSessionUser().toString()); // todo löschen
-        System.out.println(getDbUser().toString()); // todo löschen
     }
 
     @FXML

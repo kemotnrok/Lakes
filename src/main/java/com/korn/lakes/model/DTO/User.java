@@ -1,7 +1,5 @@
 package com.korn.lakes.model.DTO;
 
-import java.util.Comparator;
-
 public class User {
 
     private String email = "";
@@ -33,8 +31,6 @@ public class User {
     public boolean equals(User user){
         return this.emailHash.equals(user.emailHash) && this.passwordHash.equals(user.passwordHash);
     }
-
-
 
 //    ----------
 
