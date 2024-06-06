@@ -14,8 +14,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.korn.lakes.controller.C_General.changePassword;
-import static com.korn.lakes.controller.C_SessionData.getDbUser;
-import static com.korn.lakes.controller.C_SessionData.getSessionUser;
 
 public class V_Controller_loginNewPassword implements Initializable {
 

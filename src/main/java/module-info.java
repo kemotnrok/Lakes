@@ -11,4 +11,6 @@ module com.korn.lakes {
     opens com.korn.lakes.view to javafx.fxml;
     exports com.korn.lakes.controller;
     opens com.korn.lakes.controller to javafx.fxml;
+    exports com.korn.lakes.model.DTO;
+    opens com.korn.lakes.model.DTO to javafx.fxml;
 }

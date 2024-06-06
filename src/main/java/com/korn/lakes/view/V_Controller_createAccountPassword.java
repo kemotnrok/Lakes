@@ -1,6 +1,5 @@
 package com.korn.lakes.view;
 
-import com.korn.lakes.controller.C_General;
 import com.korn.lakes.controller.C_SessionData;
 import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;

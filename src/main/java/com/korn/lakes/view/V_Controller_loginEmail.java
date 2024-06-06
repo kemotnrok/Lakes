@@ -44,7 +44,7 @@ public class V_Controller_loginEmail implements Initializable {
         emailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
             if (isEmailValid()) actionIfEmailValid();
-            else actionIfEmailNotvalid();
+            else actionIfEmailNotValid();
         });
 
         emailField.setOnKeyTyped(event-> updateEmail());
@@ -59,7 +59,7 @@ public class V_Controller_loginEmail implements Initializable {
     @FXML
     private void onContinueToLoginPassword() throws NoUserFoundException {
         if (!isEmailValid()) {
-            actionIfEmailNotvalid();
+            actionIfEmailNotValid();
             return;
         }
         actionIfEmailValid();
@@ -110,11 +110,11 @@ public class V_Controller_loginEmail implements Initializable {
     }
 
     @FXML
-    private void actionIfEmailNotvalid() {
+    private void actionIfEmailNotValid() {
         if (!emailField.getStyleClass().contains("warning")) {
             emailField.requestFocus();
             emailField.selectEnd();
-        };
+        }
         emailField.getStyleClass().add("warning");
         emailField.selectEnd();
         continueToLoginPassword.setDisable(true);

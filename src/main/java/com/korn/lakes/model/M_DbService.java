@@ -1,9 +1,5 @@
 package com.korn.lakes.model;
 
-import com.korn.lakes.model.DTO.User;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,7 +13,7 @@ public class M_DbService {
     private static final String updateUserPassword = "UPDATE users SET password_hash = '%s', salt ='%s' where e_mail_hash like '%s'";
     private static final String insertUserPassword = "UPDATE users SET password_hash ='%s' where e_mail_hash like '%s'";
 
-    private static final String deleteUser = "Delete * from users where e_mail_hash like '%s'"; // todo
+//    private static final String deleteUser = "Delete * from users where e_mail_hash like '%s'"; // todo
 
 //    ----------
 

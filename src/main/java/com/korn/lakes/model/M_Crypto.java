@@ -5,7 +5,6 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
 import java.util.Base64;
 
 public class M_Crypto {
@@ -13,12 +12,6 @@ public class M_Crypto {
     private static final int ITERATIONS = 65536;
     private static final int KEY_LENGTH = 256;
     private static final byte[] EMAIL_SALT = "fixedSaltForEmail".getBytes();
-//
-//    public static void main(String[] args) {
-//        System.out.println(Arrays.toString(hashPasswordNewSalt("Aa00Aa00Aa")));
-//        System.out.println(Arrays.toString(hashPasswordNewSalt("Bb00Bb00Bb")));
-//
-//    }
 
     public static String hashEmail(String email) {
         try {
