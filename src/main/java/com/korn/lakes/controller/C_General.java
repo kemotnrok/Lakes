@@ -19,7 +19,7 @@ import static com.korn.lakes.model.M_DbService.updateUserPassword;
 
 public class C_General {
 
-    public static boolean develop = true;
+    public static boolean develop = false;
 
     //    Logger
     private static final Logger logger = LoggerFactory.getLogger(App.class);
