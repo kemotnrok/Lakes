@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class App extends Application {
-//    Logger
+    //    Logger
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
     @Override
@@ -40,7 +40,12 @@ public class App extends Application {
 
 //        Szene starten
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/view-loginEmail.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 440, 340);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+
+//        Start when working Todo
+//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/view-landingPage.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+
         stage.setTitle("Lakes to see");
         stage.setScene(scene);
         stage.show();

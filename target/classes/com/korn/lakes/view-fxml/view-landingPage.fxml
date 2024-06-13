@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<Pane style="-fx-background-color: #8CCBF9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.korn.lakes.view.V_Controller_landingPage">
-        <TableView style="-fx-background-color: white;">
+<HBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #c8e3ff;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.korn.lakes.view.V_Controller_landingPage">
+
+    <Pane>
+       <TableView fx:id="tableLakes" editable="true" fixedCellSize="0.0" layoutX="27.0" layoutY="116.0" prefHeight="550.0" prefWidth="1000.0" style="-fx-background-color: white;">
             <columns>
-                <TableColumn prefWidth="300" text="See" />
-                <TableColumn minWidth="0.0" prefWidth="150" text="Staat" />
-                <TableColumn prefWidth="150" text="Notiz" />
-                <TableColumn prefWidth="90" text="Bewertung" />
+                <TableColumn fx:id="columnSee" maxWidth="1100.0" prefWidth="289.0" text="See" />
+                <TableColumn fx:id="columnStaat" minWidth="0.0" prefWidth="169.0" text="Staat" />
+                <TableColumn fx:id="columnFlaeche" prefWidth="89.0" sortType="DESCENDING" text="Fläche" />
+                <TableColumn fx:id="columnSeehoehe" prefWidth="89.0" sortType="DESCENDING" text="Seehöhe" />
+                <TableColumn fx:id="columnTemperatur" prefWidth="89.0" sortType="DESCENDING" text="Temperatur" />
+                <TableColumn fx:id="columnBewertung" prefWidth="69.0" sortType="DESCENDING" text="Bewertung" />
+                <TableColumn fx:id="columnNotiz" prefWidth="199.0" text="Notiz" />
             </columns>
         </TableView>
-</Pane>
+        <SVGPath content="M107.317,30.045l47.105,40.4c-0.545,0.306-1.089,0.681-1.634,1.021c-6.126,4.22-13.648,6.909-20.149,6.909c-6.671,0-13.886-2.621-20.149-6.909c-7.522-5.275-17.562-5.275-25.084,0c-5.82,4.016-12.933,6.909-20.149,6.909c-3.438,0-7.181-0.749-10.857-2.11C57.49,35.082,91.218,2,132.673,2h21.782c6.024,0,10.891,4.867,10.891,10.891s-4.867,10.891-10.891,10.891h-21.782C123.518,23.782,114.873,26.029,107.317,30.045z M56.435,23.782c0,12.03-9.752,21.782-21.782,21.782S12.87,35.813,12.87,23.782S22.622,2,34.652,2S56.435,11.752,56.435,23.782z M106.296,80.247c7.658,5.275,17.018,8.883,26.377,8.883c9.155,0,18.855-3.676,26.343-8.883l0,0c4.05-2.893,9.564-2.655,13.342,0.579c4.901,4.05,11.061,7.147,17.222,8.577c5.854,1.361,9.496,7.215,8.134,13.069s-7.215,9.496-13.069,8.134c-8.339-1.94-15.282-5.616-19.808-8.509c-9.87,5.309-20.932,8.815-32.163,8.815c-10.857,0-20.625-3.369-27.364-6.433c-1.974-0.919-3.778-1.804-5.309-2.621c-1.532,0.817-3.301,1.736-5.309,2.621c-6.739,3.063-16.507,6.433-27.364,6.433c-11.232,0-22.293-3.506-32.163-8.781c-4.561,2.859-11.47,6.569-19.808,8.509c-5.854,1.361-11.708-2.28-13.069-8.134s2.28-11.708,8.134-13.069c6.16-1.429,12.321-4.527,17.222-8.577c3.778-3.199,9.292-3.438,13.342-0.579l0,0c7.522,5.173,17.188,8.849,26.343,8.849c9.36,0,18.719-3.608,26.377-8.883C97.481,77.558,102.518,77.558,106.296,80.247z" fill="#3fa9f5" layoutX="-26.0" scaleX="0.5" scaleY="0.5" />
+      <HBox.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </HBox.margin>
+    </Pane>
+</HBox>

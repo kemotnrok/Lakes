@@ -41,7 +41,7 @@ public class C_General {
 
     public static boolean findDbUser(User sessionUser) {
         String sessionEmailHash = M_Crypto.hashEmail(sessionUser.getEmail());
-        ArrayList<HashMap<String, String>> result = findUser(sessionEmailHash, M_Databases.users_db);
+        ArrayList<HashMap<String, String>> result = findUser(sessionEmailHash);
         getSessionUser().setEmailHash(sessionEmailHash);
         if (result.isEmpty()) {
             if(C_General.develop) logger.info("Kein User gefunden");
@@ -63,7 +63,7 @@ public class C_General {
         String sessionPassword = sessionUser.getPassword();
         String salt = getDbUser().getSalt();
         String sessionPasswordHash = Objects.requireNonNull(M_Crypto.hashPasswordGivenSalt(sessionPassword, salt));
-        ArrayList<HashMap<String, String>> result = M_DbService.findPassword(sessionEmailHash, M_Databases.users_db);
+        ArrayList<HashMap<String, String>> result = M_DbService.findPassword(sessionEmailHash);
         if (result.isEmpty()) {
             if(C_General.develop) logger.info("Falsches Passwort");
             return false;
@@ -96,4 +96,5 @@ public class C_General {
                 SessionUser:{}DbUser:{}""", sessionUser, C_SessionData.getDbUser());
         return sessionUser.equals(getDbUser());
     }
+
 }
