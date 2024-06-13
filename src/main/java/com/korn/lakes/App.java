@@ -40,7 +40,7 @@ public class App extends Application {
 
 //        Szene starten
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/view-loginEmail.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 440, 340);
 
 //        Start when working Todo
 //        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view-fxml/view-landingPage.fxml"));
