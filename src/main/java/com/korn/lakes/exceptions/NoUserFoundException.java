@@ -6,5 +6,4 @@ public class NoUserFoundException extends Exception {
     public NoUserFoundException() {
         super("Benutzer nicht gefunden");
     }
-
 }
