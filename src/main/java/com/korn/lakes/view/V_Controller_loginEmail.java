@@ -39,7 +39,7 @@ public class V_Controller_loginEmail implements Initializable {
         sessionUser = getSessionUser();
         updateEmailField();
         updateEmail();
-        if(C_General.develop) emailField.setText("aa@aa.aa");
+        if (C_General.develop) emailField.setText("aa@aa.aa");
 
         emailField.focusedProperty().addListener((observable, oldFocus, newFocus) -> {
             if (newFocus) return;
@@ -47,7 +47,7 @@ public class V_Controller_loginEmail implements Initializable {
             else actionIfEmailNotValid();
         });
 
-        emailField.setOnKeyTyped(event-> updateEmail());
+        emailField.setOnKeyTyped(event -> updateEmail());
     }
 
     @FXML
@@ -57,18 +57,24 @@ public class V_Controller_loginEmail implements Initializable {
     }
 
     @FXML
-    private void onContinueToLoginPassword() throws NoUserFoundException {
+    private void onContinueToLoginPassword() {
         if (!isEmailValid()) {
             actionIfEmailNotValid();
             return;
         }
         actionIfEmailValid();
         updateUser(sessionUser);
-        if (!findDbUser(sessionUser)) {
-            actionIfUserNotFound();
-            return;
+
+        try {
+            if (findDbUser(sessionUser)) {
+                new V_changeScene(continueToLoginPassword, "view-loginPassword");
+            } else {
+                actionIfUserNotFound();
+                throw new NoUserFoundException();
+            }
+        } catch (NoUserFoundException e) {
+            setInfo(e.getMessage());
         }
-        new V_changeScene(continueToLoginPassword, "view-loginPassword");
     }
 
     @FXML
@@ -96,16 +102,10 @@ public class V_Controller_loginEmail implements Initializable {
         // beim zweiten Mal wird die Klasse sicher entfernt
         emailField.getStyleClass().remove("warning");
         emailField.selectEnd();
-        emailField.setOnAction(event -> {
-            try {
-                onContinueToLoginPassword();
-            } catch (NoUserFoundException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        if (!userNotFound){
-        continueToLoginPassword.setDisable(false);
-        clearInfo();
+        emailField.setOnAction(event -> onContinueToLoginPassword());
+        if (!userNotFound) {
+            continueToLoginPassword.setDisable(false);
+            clearInfo();
         }
     }
 
@@ -132,13 +132,13 @@ public class V_Controller_loginEmail implements Initializable {
     }
 
     @FXML
-    private void setInfo(String text){
+    private void setInfo(String text) {
         infoLoginEmail.setText(text);
         infoLoginEmail.setVisible(true);
     }
 
     @FXML
-    private void clearInfo(){
+    private void clearInfo() {
         infoLoginEmail.setText("");
         infoLoginEmail.setVisible(false);
     }
