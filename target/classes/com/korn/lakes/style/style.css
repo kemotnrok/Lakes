@@ -46,5 +46,12 @@ Button {
     -fx-fill: #C81E1E;
 }
 
+.table-view .table-row-cell:filled:selected:focused {
+    -fx-background: red;
+}
+.table-view .table-row-cell:filled:selected {
+    -fx-background: red;
+}
+
 
 
