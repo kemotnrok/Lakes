@@ -1,5 +1,6 @@
 package com.korn.lakes.view;
 
+import com.korn.lakes.controller.C_Mail;
 import com.korn.lakes.controller.C_SessionData;
 import com.korn.lakes.model.DTO.User;
 import javafx.fxml.FXML;
@@ -58,6 +59,7 @@ public class V_Controller_createAccountEmail implements Initializable {
         }
         actionIfEmailValid();
         updateUser(sessionUser);
+        // Todo Tokenüberprüfung
         new V_changeScene(continueToCreateAccountPassword, "view-createAccountPassword");
     }
 
@@ -99,6 +101,11 @@ public class V_Controller_createAccountEmail implements Initializable {
         createAccountEmailField.selectEnd();
         continueToCreateAccountPassword.setDisable(true);
         createAccountEmailField.setOnAction(null);
+    }
+
+    private void verifyAccount(){
+        C_Mail mail = new C_Mail();
+//        mail.sendEmail(sessionUser.getEmail(), new Token().getValue()); // Todo Token dem User zuweisen
     }
 
     @FXML

@@ -63,7 +63,6 @@ public class V_Controller_createAccountPassword implements Initializable {
         actionIfPasswordValid();
         updateUser(sessionUser);
         if (!createUser(sessionUser)) return;
-        // Todo Tokenüberprüfung
         new V_changeScene(continueToConfirmAccountFromPassword, "view-confirmAccount");
     }
 
@@ -121,11 +120,6 @@ public class V_Controller_createAccountPassword implements Initializable {
         continueToConfirmAccountFromPassword.setDisable(false);
         infoCreatePassword.setText("");
         infoCreatePassword.setVisible(false);
-    }
-
-    private void verifyAccount(){
-        C_Mail mail = new C_Mail();
-        mail.sendEmail(sessionUser.getEmail(), new Token().getValue()); // Todo Token dem User zuweisen
     }
 
     @FXML
