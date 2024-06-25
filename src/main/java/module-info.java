@@ -3,6 +3,7 @@ module com.korn.lakes {
     requires javafx.fxml;
     requires java.sql;
     requires org.slf4j;
+    requires jakarta.mail;
 
 
     opens com.korn.lakes to javafx.fxml;
